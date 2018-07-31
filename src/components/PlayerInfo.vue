@@ -40,9 +40,6 @@ import { factionDesc } from '@/data/factions';
   computed: {
     data() {
       return this.player ? this.player.data : null;
-    },
-    factionDesc() {
-      return `<b>Ability: </b> ${factionDesc[this.player.faction].ability} </br><b>PI: </b> ${factionDesc[this.player.faction].PI} `;
     }
   },
   components: {
@@ -94,11 +91,7 @@ export default class PlayerInfo extends Vue {
   }
 
   get round() {
-    return this.$store.state.game.data.round;
-  }
-
-  get progress() {
-    return "";
+      return this.$store.state.game.data.round;
   }
 }
 export default interface PlayerInfo {
