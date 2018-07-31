@@ -91,7 +91,11 @@ export default class PlayerInfo extends Vue {
   }
 
   get round() {
-      return this.$store.state.game.data.round;
+    return this.$store.state.game.data.round;
+  }
+
+  get progress() {
+    return "";
   }
 }
 export default interface PlayerInfo {
