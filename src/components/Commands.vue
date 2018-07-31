@@ -1,5 +1,5 @@
 <template>
-  <div id="move">`
+  <div id="move">
     <div id="move-title">
       <h5>
         <span v-if="init">Pick the number of players</span>
@@ -250,7 +250,7 @@ export default class Commands extends Vue {
             });
           } else {
             ret.push({
-              label: "Charge " + leech + " for " + command.data.cost ,
+              label: command.data.cost && command.data.cost !== "~" ? "Charge " + leech + " for " + command.data.cost : "Charge " + leech,
               command: `${Command.ChargePower} ${leech}`
             });
           }
@@ -401,8 +401,11 @@ export default class Commands extends Vue {
 
 i.planet {
   &::before {
-    font-size: 25px;
     content: "\25cf";
+
+    .player-info & {
+      font-size: 25px;
+    }
   }
 
   // terra
