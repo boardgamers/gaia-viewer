@@ -6,6 +6,7 @@
       m: {{data.buildings.m}}/8, ts: {{data.buildings.ts}}/4, lab: {{data.buildings.lab}}/3<span v-if="data.buildings.PI">, PI</span><span v-if="data.buildings.ac1">, ac1</span><span v-if="data.buildings.ac2">, ac2</span>, gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
       <span v-if="round<6">Income: {{player.income.replace(/,/g, ', ')}}</span> <br/>
       Range: {{data.range}}, Terraforming cost: {{3 - data.terraformCostDiscount}}o<br/>
+      <span v-if="faction === 'Ivits'">Fed value: {{player.progress.structureFedValue }}, No fed value: {{player.progress.structureValue - player.progress.structureFedValue }} <br/></span> 
 
       <span style="white-space: nowrap; line-height: 1em">
         Steps: 
@@ -27,7 +28,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator';
-import { Player, factions, tiles, PlayerData, Planet, Federation, terraformingStepsRequired, Building } from '@gaia-project/engine';
+import { Player, factions, tiles, PlayerData, Planet, Federation, terraformingStepsRequired, Building, Condition } from '@gaia-project/engine';
 import { factionColor } from '@/graphics/utils';
 import TechTile from './TechTile.vue';
 import Booster from './Booster.vue';
@@ -90,7 +91,11 @@ export default class PlayerInfo extends Vue {
   }
 
   get round() {
-      return this.$store.state.game.data.round;
+    return this.$store.state.game.data.round;
+  }
+
+  get progress() {
+    return "";
   }
 }
 export default interface PlayerInfo {
