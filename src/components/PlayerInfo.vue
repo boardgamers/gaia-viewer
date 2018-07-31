@@ -40,6 +40,9 @@ import { factionDesc } from '@/data/factions';
   computed: {
     data() {
       return this.player ? this.player.data : null;
+    },
+    factionDesc() {
+      return `<b>Ability: </b> ${factionDesc[this.player.faction].ability} </br><b>PI: </b> ${factionDesc[this.player.faction].PI} `;
     }
   },
   components: {
