@@ -46,10 +46,7 @@ import { factionDesc } from '@/data/factions';
   },
   methods: {
     tooltip(faction: Faction) {
-      return `<b>Cost: </b>${factionDesc[faction].cost} </br> 
-      <b>Income: </b>${factionDesc[faction].income} </br>
-      <b>Starting: </b>${factionDesc[faction].startIncome} </br>
-      <b>Ability: </b> ${factionDesc[faction].ability} </br><b>PI: </b> ${factionDesc[faction].PI} `;
+      return factionDesc(faction);
     }
   },
   components: {

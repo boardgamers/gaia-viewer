@@ -1,9 +1,9 @@
 import { Faction } from "@gaia-project/engine";
-export const stdCost = 'm:2c,1o ts:3/6c,2o lab:5c,3o PI:6c,4o AC:6c,6o';
-export const stdIncome = 'm:1o ts:3/4/4/5c lab:1k PI:4o,1t AC1:2k AC2:1q - round:1o,1k';
-export const stdStartIncome = '1o,1k';
+const stdCost = 'm:2c,1o ts:3/6c,2o lab:5c,3o PI:6c,4o AC:6c,6o';
+const stdIncome = 'm:1o ts:3/4/4/5c lab:1k PI:4o,1t AC1:2k AC2:1q - round:1o,1k';
+const stdStartIncome = '1o,1k';
 
-export const factionDesc =  {
+const factionData =  {
   [Faction.Terrans] : {
     cost: stdCost,
     income: stdIncome,
@@ -112,4 +112,12 @@ export const factionDesc =  {
     ability : "Each time you discard a power token from area II of your power cycle to move another power token to area III, place the discarded power token in your Gaia area instead of returning it to the supply.",
     PI : `During the Gaia phase, you can discard 4 power tokens from your Gaia area to immediately gain a tech tile (standard or advanced). The rules for Gaining a Tech Tile are explained on page 13. You may do this as many times as you can afford to.`
   },
+};
+
+export function factionDesc(faction: Faction) {
+  return `<b>Cost:</b> ${factionData[faction].cost } </br> 
+  <b>Income:</b> ${factionData[faction].income} </br>
+  <b>Starting:</b> ${factionData[faction].startIncome} </br>
+  <b>Ability: </b> ${factionData[faction].ability} </br>
+  <b>PI: </b> ${factionData[faction].PI} `;
 }
