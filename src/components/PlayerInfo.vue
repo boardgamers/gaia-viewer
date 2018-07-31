@@ -69,7 +69,11 @@ export default class PlayerInfo extends Vue {
   }
 
   get factionDesc() {
-      return `<b>Ability: </b> ${factionDesc[this.player.faction].ability} </br><b>PI: </b> ${factionDesc[this.player.faction].PI} `;
+      return `<b>Cost:</b> ${factionDesc[this.player.faction].cost} </br> 
+      <b>Income:</b> ${factionDesc[this.player.faction].income} </br>
+      <b>Starting:</b> ${factionDesc[this.player.faction].startIncome} </br>
+      <b>Ability: </b> ${factionDesc[this.player.faction].ability} </br>
+      <b>PI: </b> ${factionDesc[this.player.faction].PI} `;
   }
 
   get planet() {
