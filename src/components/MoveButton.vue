@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button class='btn btn-secondary mr-2 mb-2 move-button' @click="handleClick" @mouseenter="hover" @mouseleave="leave" :title="button.tooltip" >
+    <button class='btn btn-secondary mr-2 mb-2 move-button' @click="handleClick" @mouseenter="hover" @mouseleave="leave" :title="button.tooltip" v-b-tooltip.html>
       <slot></slot>
     </button>
-    <b-modal v-model="modalShow" @ok="handleOK" :title="button.label" ok-title="OK, I pick this one!">
-        <p class="my-4" v-html="button.tooltip"></p>
+    <b-modal v-model="modalShow" size="lg" @ok="handleOK" :title="button.label" ok-title="OK, I pick this one!">
+      <p class="my-2"  v-html="button.modal"></p>
     </b-modal>
   </div>
 </template>
@@ -102,7 +102,7 @@ export default class MoveButton extends Vue {
         const keys: GaiaHex[] = [...highlighted.keys()];
         this.$store.commit("gaiaViewer/highlightHexes", new Map([...keys.map(key => [key, null])] as any));
       });
-    } else if ( this.button.command.split(' ')[0] === "faction") {
+    } else if ( this.button.command.split(' ')[0] === Command.ChooseFaction) {
       this.modalShow = true;
     } else {
       this.emitCommand();
