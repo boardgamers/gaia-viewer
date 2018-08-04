@@ -1,13 +1,18 @@
 <template>
-  <button class='btn btn-secondary mr-2 mb-2 move-button' @click="handleClick" @mouseenter="hover" @mouseleave="leave" :title="button.tooltip" v-b-tooltip.html>
-    <slot></slot>
-  </button>
+  <div>
+    <button class='btn btn-secondary mr-2 mb-2 move-button' @click="handleClick" @mouseenter="hover" @mouseleave="leave" :title="button.tooltip" >
+      <slot></slot>
+    </button>
+    <b-modal v-model="modalShow" @ok="handleOK" :title="button.label" ok-title="OK, I pick this one!">
+        <p class="my-4" v-html="button.tooltip"></p>
+    </b-modal>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator';
-import {GaiaHex, TechTilePos, AdvTechTilePos, Booster} from '@gaia-project/engine';
+import {GaiaHex, TechTilePos, AdvTechTilePos, Booster, Command} from '@gaia-project/engine';
 import {HighlightHexData, ButtonData} from '../data';
 
 @Component({
@@ -17,11 +22,14 @@ import {HighlightHexData, ButtonData} from '../data';
     }
   }
 })
+
 export default class MoveButton extends Vue {
   @Prop()
   public button: ButtonData;
 
   private subscription: () => {} = null;
+  private modalShow: boolean = false;
+
 
   subscribe(action: string, callback: any) {
     action = "gaiaViewer/" + action;
@@ -94,9 +102,15 @@ export default class MoveButton extends Vue {
         const keys: GaiaHex[] = [...highlighted.keys()];
         this.$store.commit("gaiaViewer/highlightHexes", new Map([...keys.map(key => [key, null])] as any));
       });
+    } else if ( this.button.command.split(' ')[0] === "faction") {
+      this.modalShow = true;
     } else {
       this.emitCommand();
     }
+  }
+
+  handleOK() {
+    this.emitCommand();
   }
 
   emitCommand(append?: string, params: {disappear?: boolean, final?: boolean} = {disappear: true, final: false}) {
