@@ -1,7 +1,14 @@
 <template>
   <div :class="['player-info', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
     <div class="text">
-      <b>{{name}}</b> - <span v-b-tooltip.hoover.html="tooltip" >{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span><br/>
+      <b>{{name}}</b> - <span v-b-modal="faction" >{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
+      <b-modal :id="faction" :title="faction">
+        <p class="my-2" v-html="tooltip">  Steps: 
+        <span v-for="i in [0, 1, 2, 3]" :key="i" :class="{'ml-2': i > 0}">
+          <i v-for="planet in planetsWithSteps(i)" :class="['planet', planet]" :key="planet" /> {{i}}
+        </span></p>
+      </b-modal>
+      <br/>
       {{data.credits}}c, {{data.ores}}o, {{data.knowledge}}k, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
       m: {{data.buildings.m}}/8, ts: {{data.buildings.ts}}/4, lab: {{data.buildings.lab}}/3<span v-if="data.buildings.PI">, PI</span><span v-if="data.buildings.ac1">, ac1</span><span v-if="data.buildings.ac2">, ac2</span>, gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
       <span v-if="round<6">Income: {{player.income.replace(/,/g, ', ')}}</span> <br/>
