@@ -3,10 +3,7 @@
     <div class="text">
       <b>{{name}}</b> - <span v-b-modal="faction" >{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
       <b-modal :id="faction" :title="faction">
-        <p class="my-2" v-html="tooltip">  Steps: 
-        <span v-for="i in [0, 1, 2, 3]" :key="i" :class="{'ml-2': i > 0}">
-          <i v-for="planet in planetsWithSteps(i)" :class="['planet', planet]" :key="planet" /> {{i}}
-        </span></p>
+        <p class="my-2" v-html="tooltip"> </p>
       </b-modal>
       <br/>
       {{data.credits}}c, {{data.ores}}o, {{data.knowledge}}k, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
