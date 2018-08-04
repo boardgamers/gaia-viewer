@@ -10,12 +10,16 @@
       <div class="col-md-6 order-2 order-md-1">
         <div v-if="sessionPlayer === undefined">
           <PlayerInfo :player='orderedPlayers[0]'/>
-          <!-- todo: turnOrder -->
+          <div>
+            {{turnOrderDesc}} 
+          </div>
           <PlayerInfo v-for="player in orderedPlayers.slice(1)" :player='player' :key="player.player" />
         </div>
         <div v-else>
           <PlayerInfo :player='sessionPlayer'/>
-          <!-- todo: turnOrder -->
+          <div>
+            {{turnOrderDesc}} 
+          </div>   
           <PlayerInfo v-for="player in orderedPlayers.filter(pl => pl !== sessionPlayer)" :player='player' :key="player.player" />
         </div>
         <Pool />
@@ -82,6 +86,21 @@ import { GameApi } from '../api';
       }
 
       return turnOrder.concat(data.passedPlayers).map(player => data.players[player]);
+    },
+    turnOrderDesc() {
+      const data = this.data;
+
+      if (!data.round || !data.turnOrder) {
+        return "Turn order: " + data.players.map(pl => pl.faction).join(', ');
+      }
+
+      let turnOrder = data.turnOrder;
+
+      if (data.turnOrder.indexOf(this.player) !== -1) {
+        turnOrder = turnOrder.slice(turnOrder.indexOf(this.player)).concat(turnOrder.slice(0, turnOrder.indexOf(this.player)));
+      }
+ 
+      return "Turn order: " + turnOrder.map(pl => data.players[pl].faction ).concat(data.passedPlayers.map(pl => data.players[pl].faction + " (passed)")).join(', ');
     },
     canPlay() {
       return !this.ended && !this.gameId || this.player !== undefined && this.data.players[this.player].auth === this.auth;
