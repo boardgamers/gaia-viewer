@@ -1,6 +1,13 @@
 <template>
-  <div :class="['player-info', 'row', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
+  <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
     <div class="text">
+      <svg viewBox="-0.2 -0.2 45 22.5" class="player-board">
+        <BuildingGroup transform="translate(3.5, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" />
+        <BuildingGroup transform="translate(12, 14)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" />
+        <BuildingGroup transform="translate(0, 17)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" />
+        <BuildingGroup transform="translate(11, 17)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" />
+        <BuildingGroup transform="translate(0, 20)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" />
+      </svg>
       <b :class="['player-name', {dropped: player.dropped}]" @click="playerClick(player)">{{name}}</b> - <span v-b-modal="faction" class="faction-name" role="button">{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
       <br/>
       <span :class="{maxResource: data.credits >= 30}">{{data.credits}}c<small>/30</small></span>, <span :class="{maxResource: data.ores >= 15}">{{data.ores}}o<small>/15</small></span>, <span :class="{maxResource: data.knowledge >= 15}">{{data.knowledge}}k<small>/15</small></span>, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
@@ -51,6 +58,7 @@ import TechTile from './TechTile.vue';
 import Booster from './Booster.vue';
 import SpecialAction from './SpecialAction.vue';
 import FederationTile from './FederationTile.vue';
+import BuildingGroup from "./PlayerBoard/BuildingGroup.vue";
 import { factionDesc, planetsWithSteps } from '../data/factions';
 
 @Component({
@@ -63,7 +71,8 @@ import { factionDesc, planetsWithSteps } from '../data/factions';
     TechTile,
     Booster,
     SpecialAction,
-    FederationTile
+    FederationTile,
+    BuildingGroup
   }
 })
 export default class PlayerInfo extends Vue {
@@ -177,6 +186,7 @@ export default interface PlayerInfo {
 
   .tiles, .text {
     z-index: 1;
+    position: relative;
   }
 
   .faction-name {
