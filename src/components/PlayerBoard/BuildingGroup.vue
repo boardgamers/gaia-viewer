@@ -1,6 +1,6 @@
 <template>
   <g>
-    <rect :x="0" y="-1.2" :width=width height=2.4 stroke=black stroke-width=0.07 fill=none rx=0.2 ry=0.2 />
+    <rect :x="0" y="-1.2" :width=width height=2.4 stroke=black stroke-width=0.07 fill="#ffffff35" rx=0.2 ry=0.2 />
     <Resource v-if="factionIncome.length > 0" :kind="factionIncome[0].type" :count="factionIncome[0].count" transform="translate(0.77, 0) scale(0.07)" />
     <g v-for="i in buildingList" :transform="`translate(${(i+0.5)*buildingSpacing+offset}, 0)`" :key=i v-b-tooltip :title="tooltip(i)">
       <circle stroke=black stroke-width=0.07 fill=white r=1  :key=i v-if="!isPI" />

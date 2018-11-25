@@ -1,19 +1,19 @@
 <template>
   <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
     <div class="text">
-      <svg viewBox="-0.2 -0.2 45 22.5" class="player-board">
-        <BuildingGroup transform="translate(2.2, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" resource="pw" />
-        <BuildingGroup transform="translate(12, 14)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" resource="q" />
-        <BuildingGroup transform="translate(0, 17)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" resource="c" />
-        <BuildingGroup transform="translate(11, 17)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" resource="k" />
-        <BuildingGroup transform="translate(0, 20)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" resource="o" />
+      <svg viewBox="-0.2 -0.5 38.5 22.4" class="player-board">
+        <PlayerBoardInfo transform="translate(0.5, 0.5)" @playerClick="playerClick(player)" :player="player" :faction="player.faction" :data="data" />
+        <BuildingGroup transform="translate(2.2, 11)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" resource="pw" />
+        <BuildingGroup transform="translate(12, 11)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" resource="q" />
+        <BuildingGroup transform="translate(0, 14)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" resource="c" />
+        <BuildingGroup transform="translate(11, 14)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" resource="k" />
+        <BuildingGroup transform="translate(0, 17)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" resource="o" />
+
+        <SpecialAction v-for="(action, i) in player.actions" :action="action.rewards" :disabled="!action.enabled || passed" :key="action.action + '-' + i" :transform="`translate(${i*3.1}, 18.5) scale(0.06)`"/>
       </svg>
-      <b :class="['player-name', {dropped: player.dropped}]" @click="playerClick(player)">{{name}}</b> - <span v-b-modal="faction" class="faction-name" role="button">{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
-      <br/>
       <span :class="{maxResource: data.credits >= 30}">{{data.credits}}c<small>/30</small></span>, <span :class="{maxResource: data.ores >= 15}">{{data.ores}}o<small>/15</small></span>, <span :class="{maxResource: data.knowledge >= 15}">{{data.knowledge}}k<small>/15</small></span>, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
       gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
       <span v-if="round<6">Income: {{player.income.replace(/,/g, ', ')}}<br/></span>
-      Range: {{data.range}}, Terraforming cost: {{3 - data.terraformCostDiscount}}o<br/>
       <span v-if="faction === 'Ivits'">Fed value: {{player.fedValue }}, No fed value: {{player.structureValue - player.fedValue }} <br/></span> 
  
       <span style="white-space: nowrap; line-height: 1em">
@@ -41,7 +41,7 @@
       <Booster v-if="data.tiles.booster" class="mb-1 mr-1" :booster="data.tiles.booster" :disabled="passed"/>
       <FederationTile v-for="(fed,i) in data.tiles.federations" class="mb-1 mr-1" :key="i" :federation="fed.tile" :used="!fed.green" :player="player.player" :numTiles="1"/>
       <TechTile v-for="tech in data.tiles.techs" :covered="!tech.enabled" class="mb-1 mr-1" :key="tech.pos" :pos="tech.pos" :player="player.player" />
-      <SpecialAction v-for="(action, i) in player.actions" :action="action.rewards" :disabled="!action.enabled || passed" :key="action.action + '-' + i" />
+      
     </div>
     <b-modal :id="faction" :title="faction" size="lg">
       <div v-html="tooltip"> </div>
@@ -59,6 +59,7 @@ import Booster from './Booster.vue';
 import SpecialAction from './SpecialAction.vue';
 import FederationTile from './FederationTile.vue';
 import BuildingGroup from "./PlayerBoard/BuildingGroup.vue";
+import PlayerBoardInfo from "./PlayerBoard/Info.vue";
 import { factionDesc, planetsWithSteps } from '../data/factions';
 
 @Component({
@@ -72,7 +73,8 @@ import { factionDesc, planetsWithSteps } from '../data/factions';
     Booster,
     SpecialAction,
     FederationTile,
-    BuildingGroup
+    BuildingGroup,
+    PlayerBoardInfo
   }
 })
 export default class PlayerInfo extends Vue {
@@ -85,13 +87,6 @@ export default class PlayerInfo extends Vue {
 
   get faction() {
     return factions[this.player.faction].name;
-  }
-
-  get name() {
-    if (this.player.name) {
-      return this.player.name;
-    }
-    return "Player " + (this.player.player + 1);
   }
 
   get factionColor() {
@@ -145,21 +140,28 @@ export default interface PlayerInfo {
   pointer-events: none;
 }
 
+.player-board {
+  border: 1px solid black;
+
+  .board-text {
+    dominant-baseline: central;
+    font-size: 1.2px;
+  }
+}
+
 .player-info {
   margin-bottom: 1em;
-  padding-bottom: 0.5em;
-  padding-left: 0.5em;
-  padding-top: 0.2em;
+  padding: 0.5em;
   border-radius: 5px;
 
   position: relative;
 
-  &::after {
-    position: absolute;
-    content: " ";
-    background: rgba(white, 0.4);
-    top: 0; bottom: 0; left: 0; right: 0;
-  }
+  // &::after {
+  //   position: absolute;
+  //   content: " ";
+  //   background: rgba(white, 0.4);
+  //   top: 0; bottom: 0; left: 0; right: 0;
+  // }
 
   &.bescods::after, &.firaks::after {
     background: rgba(white, 0.7);
@@ -167,6 +169,7 @@ export default interface PlayerInfo {
 
   .player-name {
     cursor: pointer;
+    font-weight: bold;
 
     &.dropped {
       text-decoration: line-through;
