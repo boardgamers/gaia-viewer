@@ -5,7 +5,7 @@
     <g v-for="i in buildingList" :transform="`translate(${(i+0.5)*buildingSpacing+offset}, 0)`" :key=i v-b-tooltip :title="tooltip(i)">
       <circle stroke=black stroke-width=0.07 fill=white r=1  :key=i v-if="!isPI" />
       <rect stroke=black stroke-width=0.07 fill=white :x="-2.2+offset" width=4 y=-1 height=2  :key=i v-else />
-      <Building :building="building" :faction="faction" :transform="`translate(${isPI ? 0.5 : 0}, 0) scale(1.5)`" v-if="i >= placed" />
+      <Building :building="building" :faction="faction" :transform="`translate(${isPI ? 0.5 : 0}, 0) scale(1.5)`" v-if="showBuilding(i)" />
       <Resource v-for="(resource,index) in resources(i)" :key="'field-' + index"  :kind="resource.type" :count="resource.count" :transform="`translate(${index*1.5 + isPI*0.5}, 0) scale(0.08)`" />
     </g>
   </g>
@@ -39,9 +39,13 @@ export default class BuildingGroup extends Vue {
   @Prop()
   placed: number;
   @Prop()
-  resource: ResourceEnum;
+  resource: ResourceEnum[];
+  @Prop({default: false}) 
+  ac1: boolean;
+  @Prop({default: false}) 
+  ac2: boolean;
 
-  board: FactionBoard = factionBoard(Faction.Terrans);
+  board: FactionBoard = factionBoard(this.faction || Faction.Terrans);
 
   get buildingList() {
     return [0,1,2,3,4,5,6,7].slice(0, this.nBuildings);
@@ -52,7 +56,6 @@ export default class BuildingGroup extends Vue {
   }
 
   tooltip(i: number) {
-    console.log(JSON.stringify(this.resources(i, true)), this.building, this.faction, i);
     return "Income: " + (this.resources(i, true).join(", ") || "~");
   }
 
@@ -75,11 +78,18 @@ export default class BuildingGroup extends Vue {
   get factionIncome(): Reward[] {
     const income: Reward[] = [].concat(...this.board.income.filter(ev => ev.operator === Operator.Income).map(ev => ev.rewards));
 
-    return income.filter(rew => rew.type === this.resource);
+    return income.filter(rew => this.resource.includes(rew.type));
+  }
+
+  showBuilding(i: number) {
+    if (this.ac1 || this.ac2) {
+      return i === 0 ? this.ac1 : this.ac2;
+    }
+    return i >= this.placed;
   }
 
   resources(i: number, forced = false) : Reward[] {
-    if (i >= this.placed && !forced) {
+    if (this.showBuilding(i) && !forced) {
       return [];
     }
 

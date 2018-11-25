@@ -1,6 +1,7 @@
 <template>
   <g>
-    <rect x=-0.5 y=-0.5 width=38 height=8 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
+    <rect x=-0.5 y=-0.5 width=19.5 height=8 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
+    <rect x=20 y=-0.5 width=17.5 height=2 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
     <g transform="translate(0, 0.5)">
       <text class="board-text">
         <tspan @click="$emit('playerClick')" :class="['player-name', {dropped: player.dropped}]" role="button">{{name}}</tspan>
@@ -37,6 +38,28 @@
       </g>
       <g transform="translate(0, 1.5)">
         <text class="board-text" x=0.25>I</text>
+        <g transform="translate(2.2, 0)" v-if="income('c') > 0">
+          <text class="board-text" transform="scale(0.7)">+{{income('c')}}</text>
+        </g>
+        <g transform="translate(5.5, 0)" v-if="income('o') > 0">
+          <text class="board-text" transform="scale(0.7)">+{{income('o')}}</text>
+        </g>
+        <g transform="translate(9, 0)" v-if="income('k') > 0">
+          <text class="board-text" transform="scale(0.7)">+{{income('k')}}</text>
+        </g>
+        <g transform="translate(12, 0)" v-if="income('q') > 0">
+          <text class="board-text" transform="scale(0.7)">+{{income('q')}}</text>
+        </g>
+      </g>
+      <g transform="translate(0,3.5) scale(0.8)">
+        <text class="board-text">
+          <tspan>GF: </tspan>
+          <tspan v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</tspan>
+          <tspan>{{data.buildings.gf}}/{{data.gaiaformers}}</tspan>
+        </text>
+        <text class="board-text" x=5>Sat: {{data.satellites}}</text>
+        <text class="board-text" x=9.3>Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
+        <text class="board-text" x=15>TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
       </g>
     </g>
   </g>
@@ -45,19 +68,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import Building from '../Building.vue';
 import Resource from '../Resource.vue';
-import {Building as BuildingEnum, Faction, Reward, FactionBoard, factionBoard, Operator, Resource as ResourceEnum, factions, PlayerData, Player} from '@gaia-project/engine';
+import {Building as BuildingEnum, Faction, Reward, Operator, Resource as ResourceEnum, factions, PlayerData, Player} from '@gaia-project/engine';
 
 @Component({
   components: {
-    Building,
     Resource
-  },
-  watch: {
-    faction(newVal) {
-      this.board = factionBoard(newVal);
-    }
   }
 })
 export default class BuildingGroup extends Vue {
@@ -77,6 +93,16 @@ export default class BuildingGroup extends Vue {
       return this.player.name;
     }
     return "Player " + (this.player.player + 1);
+  }
+
+  income(resource: ResourceEnum) {
+    const index = this.player.income.search(new RegExp('[0-9]+' + resource));
+
+    if (index < 0) {
+      return 0;
+    }
+
+    return parseInt(this.player.income.substr(index));
   }
 }
 

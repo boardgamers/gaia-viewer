@@ -1,47 +1,49 @@
 <template>
   <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
-    <div class="text">
-      <svg viewBox="-0.2 -0.5 38.5 22.4" class="player-board">
+    <div class="board">
+      <svg viewBox="-0.2 -0.5 38.5 21.4" class="player-board">
         <PlayerBoardInfo transform="translate(0.5, 0.5)" @playerClick="playerClick(player)" :player="player" :faction="player.faction" :data="data" />
-        <BuildingGroup transform="translate(2.2, 11)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" resource="pw" />
-        <BuildingGroup transform="translate(12, 11)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" resource="q" />
-        <BuildingGroup transform="translate(0, 14)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" resource="c" />
-        <BuildingGroup transform="translate(11, 14)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" resource="k" />
-        <BuildingGroup transform="translate(0, 17)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" resource="o" />
+        <BuildingGroup transform="translate(2.2, 10)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" :resource="['pw','t']" />
+        <BuildingGroup transform="translate(12, 10)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="0" :ac1="data.buildings.ac1" :ac2="data.buildings.ac2" :resource="['q']" />
+        <BuildingGroup transform="translate(0, 13)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" :resource="['c']" />
+        <BuildingGroup transform="translate(11, 13)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" :resource="['k']" />
+        <BuildingGroup transform="translate(0, 16)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" :resource="['o']" />
+        <!-- M to TS -->
+        <line x1=5.7 x2=5.7 y1=14.2 y2=14.8 stroke=black stroke-width="0.06" />
+        <!-- TS to PI -->
+        <line x1=5.7 x2=5.7 y1=11.2 y2=11.8 stroke=black stroke-width="0.06" />
+        <!-- LAB to AC -->
+        <line x1=15.3 x2=15.3 y1=11.2 y2=11.8 stroke=black stroke-width="0.06" />
+        <!-- TS to LAB -->
+        <line x1=10.4 x2=11 y1=13.0 y2=13.0 stroke=black stroke-width="0.06" />
+        <PowerBowls transform="translate(29,15)" :faction="player.Faction" :data="data" :player="player" />
 
-        <SpecialAction v-for="(action, i) in player.actions" :action="action.rewards" :disabled="!action.enabled || passed" :key="action.action + '-' + i" :transform="`translate(${i*3.1}, 18.5) scale(0.06)`"/>
+        <g transform="translate(29.3, 5)">
+          <g v-for="i in [0, 1, 2, 3]" :key="i" :transform="`translate(${(i-2)*3.8}, 0)`">
+            <g v-for="(planet, index) in planetsWithSteps(i)" :key="planet" :transform="`translate(0, ${(i > 0 ? (index > 0 ? 1 : -1) : 0)*1.4})`">
+              <circle :r="1" style="stroke-width: 0.06px !important"  :class="['player-token', 'planet-fill', planet]" />
+              <text :style="`font-size: 1.2px; text-anchor: middle; dominant-baseline: mathematical; fill: ${planetFill(planet)}`">{{player.ownedPlanetsCount[planet]}}</text>
+            </g>
+            <line x1=1.9 x2=1.9 y1=-2.3 y2=2.3 stroke-width=0.06 stroke=black />
+          </g>
+          <g :transform="`translate(7.6, 0)`">
+            <circle :r="1" style="stroke-width: 0.06px !important"  :class="['player-token', 'planet-fill', 'g']" />
+            <text style="font-size: 1.2px; text-anchor: middle; dominant-baseline: mathematical; fill: white">{{player.ownedPlanetsCount['g']}}</text>
+          </g>
+        </g>
+
+        <SpecialAction v-for="(action, i) in player.actions" :action="action.rewards" :disabled="!action.enabled || passed" :key="action.action + '-' + i" y=17.5 width=3.1 height=3.1 :x=3.3*i />
       </svg>
-      <span :class="{maxResource: data.credits >= 30}">{{data.credits}}c<small>/30</small></span>, <span :class="{maxResource: data.ores >= 15}">{{data.ores}}o<small>/15</small></span>, <span :class="{maxResource: data.knowledge >= 15}">{{data.knowledge}}k<small>/15</small></span>, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
-      gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
-      <span v-if="round<6">Income: {{player.income.replace(/,/g, ', ')}}<br/></span>
-      <span v-if="faction === 'Ivits'">Fed value: {{player.fedValue }}, No fed value: {{player.structureValue - player.fedValue }} <br/></span> 
- 
-      <span style="white-space: nowrap; line-height: 1em">
-        Steps: 
-        <span v-for="i in [0, 1, 2, 3]" :key="i" :class="{'ml-2': i > 0}">
-          <span v-for="planet in planetsWithSteps(i)" :key="planet"  >
-            <svg width="16" height="20" viewbox="0 0 16 15" >
-              <circle :cx="8" :cy="8" :r="6"  :class="['player-token', 'planet-fill', planet]" />
-            </svg>
-          </span> 
-          <span>{{i}}</span>
-        </span>
-      </span><br/>
-      <span style="line-height: 1em" v-if="hasPlanets">Colonized: 
-        <span v-for="(count, planet) in player.ownedPlanetsCount"  :key="planet"  class="mr-2">
-          <svg width="16" height="20" viewbox="0 0 16 15" >
-            <circle :cx="8" :cy="8" :r="6"  :class="['player-token', 'planet-fill', planet]" />
-          </svg>
-        <span>{{count}} </span>
-        </span>
+      <span v-if="faction === 'Ivits'">
+        Value of structures in federation: {{player.fedValue }}<br /> 
+        Value of other structures: {{player.structureValue - player.fedValue }}
       </span>
     </div>
 
-    <div class="tiles row no-gutters pl-3 mt-1">
+    <div class="tiles row no-gutters mt-1">
       <Booster v-if="data.tiles.booster" class="mb-1 mr-1" :booster="data.tiles.booster" :disabled="passed"/>
       <FederationTile v-for="(fed,i) in data.tiles.federations" class="mb-1 mr-1" :key="i" :federation="fed.tile" :used="!fed.green" :player="player.player" :numTiles="1"/>
       <TechTile v-for="tech in data.tiles.techs" :covered="!tech.enabled" class="mb-1 mr-1" :key="tech.pos" :pos="tech.pos" :player="player.player" />
-      
     </div>
     <b-modal :id="faction" :title="faction" size="lg">
       <div v-html="tooltip"> </div>
@@ -60,6 +62,7 @@ import SpecialAction from './SpecialAction.vue';
 import FederationTile from './FederationTile.vue';
 import BuildingGroup from "./PlayerBoard/BuildingGroup.vue";
 import PlayerBoardInfo from "./PlayerBoard/Info.vue";
+import PowerBowls from './PlayerBoard/PowerBowls.vue';
 import { factionDesc, planetsWithSteps } from '../data/factions';
 
 @Component({
@@ -74,6 +77,7 @@ import { factionDesc, planetsWithSteps } from '../data/factions';
     SpecialAction,
     FederationTile,
     BuildingGroup,
+    PowerBowls,
     PlayerBoardInfo
   }
 })
@@ -101,16 +105,19 @@ export default class PlayerInfo extends Vue {
     return factions[this.player.faction].planet;
   }
 
+  planetFill(planet: string) {
+    if (planet === Planet.Titanium || planet === Planet.Swamp) {
+      return "white";
+    }
+    return "black";
+  }
+
   planetsWithSteps(steps: number) {
     return planetsWithSteps(this.planet, steps);
   }
 
   get passed() {
     return (this.$store.state.gaiaViewer.data.passedPlayers || []).includes(this.player.player);
-  }
-
-  power(area: string) {
-    return this.data.power[area] + (this.data.brainstone === area ? "(b)" : "");
   }
 
   get round() {
@@ -187,7 +194,7 @@ export default interface PlayerInfo {
     align-items: center;
   }
 
-  .tiles, .text {
+  .tiles, .board {
     z-index: 1;
     position: relative;
   }
