@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g class="board-info">
     <rect x=-0.5 y=-0.5 width=19.5 height=8 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
     <rect x=20 y=-0.5 width=17.5 height=2 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
     <g transform="translate(0, 0.5)">
@@ -105,5 +105,11 @@ export default class BuildingGroup extends Vue {
 <style lang="scss">
   .maxResource {
     fill: red;
+  }
+
+  .board-info {
+    g.resource {
+      opacity: 1;
+    }
   }
 </style>

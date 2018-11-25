@@ -112,10 +112,6 @@ export default class BuildingGroup extends Vue {
     .building-in-group {
       stroke-width: 0.05px;
     }
-
-    g.resource {
-      opacity: 0.9;
-    }
   }
 }
 </style>
