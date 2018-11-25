@@ -1,8 +1,10 @@
 <template>
-  <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
-    <div class="board">
-      <svg viewBox="-0.2 -0.5 38.5 21.4" class="player-board">
-        <PlayerBoardInfo transform="translate(0.5, 0.5)" @playerClick="playerClick(player)" :player="player" :faction="player.faction" :data="data" />
+  <div class="player-info no-gutters" v-if="player && player.faction">
+    <span @click="playerClick(player)" :class="['player-name', {dropped: player.dropped}]" role="button">{{name}}</span>
+    <div class="board mt-2">
+      <svg viewBox="-0.2 -0.5 38.5 21.4" class="player-board" :style="`background-color: ${factionColor}`">
+        <rect v-if="player.faction === 'bescods' || player.faction === 'firaks'" x=-1 y=-1 width=50 height=50 fill="#ffffff44"></rect>
+        <PlayerBoardInfo transform="translate(0.5, 0.5)" :player="player" :faction="player.faction" :data="data" />
         <BuildingGroup transform="translate(2.2, 10)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" :resource="['pw','t']" />
         <BuildingGroup transform="translate(12, 10)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="0" :ac1="data.buildings.ac1" :ac2="data.buildings.ac2" :resource="['q']" />
         <BuildingGroup transform="translate(0, 13)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" :resource="['c']" />
@@ -89,12 +91,15 @@ export default class PlayerInfo extends Vue {
     this.$store.dispatch("gaiaViewer/playerClick", player);
   }
 
-  get faction() {
-    return factions[this.player.faction].name;
-  }
-
   get factionColor() {
     return factionColor(this.player.faction);
+  }
+
+  get name() {
+    if (this.player.name) {
+      return this.player.name;
+    }
+    return "Player " + (this.player.player + 1);
   }
 
   get tooltip() {
@@ -149,19 +154,15 @@ export default interface PlayerInfo {
 
 .player-board {
   border: 1px solid black;
+  max-width: 600px;
+  display: block;
+  // margin-left: auto;
+  margin-right: auto;
 
   .board-text {
     dominant-baseline: central;
     font-size: 1.2px;
   }
-}
-
-.player-info {
-  margin-bottom: 1em;
-  padding: 0.5em;
-  border-radius: 5px;
-
-  position: relative;
 
   // &::after {
   //   position: absolute;
@@ -173,6 +174,16 @@ export default interface PlayerInfo {
   &.bescods::after, &.firaks::after {
     background: rgba(white, 0.7);
   }
+
+}
+
+.player-info {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  border-radius: 5px;
+
+  position: relative;
 
   .player-name {
     cursor: pointer;
@@ -192,6 +203,7 @@ export default interface PlayerInfo {
   .tiles {
     align-content: baseline;
     align-items: center;
+    // justify-content: center;
   }
 
   .tiles, .board {

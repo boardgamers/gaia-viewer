@@ -495,9 +495,6 @@ canvas#map {
   height: 450px;
 }
 
-.turn-order {
-  margin-bottom: 1em;
-}
 
 .space-map, .scoring-research-board {
   max-height: 450px;

@@ -4,8 +4,6 @@
     <rect x=20 y=-0.5 width=17.5 height=2 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
     <g transform="translate(0, 0.5)">
       <text class="board-text">
-        <tspan @click="$emit('playerClick')" :class="['player-name', {dropped: player.dropped}]" role="button">{{name}}</tspan>
-        <tspan> - </tspan>
         <tspan class="faction-name" v-b-modal="factionName" role="button">{{factionName}}</tspan>
       </text>
       <text class="board-text" x=21>
@@ -58,8 +56,8 @@
           <tspan>{{data.buildings.gf}}/{{data.gaiaformers}}</tspan>
         </text>
         <text class="board-text" x=5>Sat: {{data.satellites}}</text>
-        <text class="board-text" x=9.3>Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
-        <text class="board-text" x=15>TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
+        <text class="board-text" x=9.3 v-if="spaceShips">Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
+        <text class="board-text" x=15 v-if="spaceShips">TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
       </g>
     </g>
   </g>
@@ -88,11 +86,8 @@ export default class BuildingGroup extends Vue {
     return factions[this.faction].name;
   }
 
-  get name() {
-    if (this.player.name) {
-      return this.player.name;
-    }
-    return "Player " + (this.player.player + 1);
+  get spaceShips(): boolean {
+    return (this.$store.state.gaiaViewer.data.expansions % 2) === 1;
   }
 
   income(resource: ResourceEnum) {
