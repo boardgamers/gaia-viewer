@@ -4,7 +4,7 @@
     <rect x=20 y=-0.5 width=17.5 height=2 rx=0.1 ry=0.1 fill="#ffffff37" stroke=black stroke-width=0.07 />
     <g transform="translate(0, 0.5)">
       <text class="board-text">
-        <tspan class="faction-name" v-b-modal="factionName" role="button">{{factionName}}</tspan>
+        <tspan class="faction-name" v-b-modal="faction" role="button">{{factionName}}</tspan>
       </text>
       <text class="board-text" x=21>
         TF: {{3 - data.terraformCostDiscount}}

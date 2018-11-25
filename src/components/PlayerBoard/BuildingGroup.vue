@@ -83,7 +83,7 @@ export default class BuildingGroup extends Vue {
 
   showBuilding(i: number) {
     if (this.ac1 || this.ac2) {
-      return i === 0 ? this.ac1 : this.ac2;
+      return i === 0 ? !this.ac1 : !this.ac2;
     }
     return i >= this.placed;
   }
@@ -100,7 +100,7 @@ export default class BuildingGroup extends Vue {
       i = 0;
     }
 
-    return [].concat(...this.board.buildings[building].income[i].filter(ev => ev.operator === Operator.Income).map(ev => ev.rewards));
+    return [].concat(...this.board.buildings[building].income[i].filter(ev => ev.operator === Operator.Income || ev.rewards.toString() === '1q').map(ev => ev.rewards));
   }
 }
 

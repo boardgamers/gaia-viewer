@@ -36,7 +36,7 @@
 
         <SpecialAction v-for="(action, i) in player.actions" :action="action.rewards" :disabled="!action.enabled || passed" :key="action.action + '-' + i" y=17.5 width=3.1 height=3.1 :x=3.3*i />
       </svg>
-      <span v-if="faction === 'Ivits'">
+      <span v-if="player.faction === 'ivits'">
         Value of structures in federation: {{player.fedValue }}<br /> 
         Value of other structures: {{player.structureValue - player.fedValue }}
       </span>
@@ -47,7 +47,7 @@
       <FederationTile v-for="(fed,i) in data.tiles.federations" class="mb-1 mr-1" :key="i" :federation="fed.tile" :used="!fed.green" :player="player.player" :numTiles="1"/>
       <TechTile v-for="tech in data.tiles.techs" :covered="!tech.enabled" class="mb-1 mr-1" :key="tech.pos" :pos="tech.pos" :player="player.player" />
     </div>
-    <b-modal :id="faction" :title="faction" size="lg">
+    <b-modal :id="player.faction" :title="factionName" size="lg">
       <div v-html="tooltip"> </div>
     </b-modal>
   </div>
@@ -108,6 +108,10 @@ export default class PlayerInfo extends Vue {
 
   get planet() {
     return factions[this.player.faction].planet;
+  }
+
+  get factionName(): string {
+    return factions[this.player.faction].name;
   }
 
   planetFill(planet: string) {
