@@ -18,7 +18,7 @@
         <line x1=15.3 x2=15.3 y1=11.2 y2=11.8 stroke=black stroke-width="0.06" />
         <!-- TS to LAB -->
         <line x1=10.4 x2=11 y1=13.0 y2=13.0 stroke=black stroke-width="0.06" />
-        <PowerBowls transform="translate(29,15)" :faction="player.Faction" :data="data" :player="player" />
+        <PowerBowls transform="translate(29,15)" :faction="player.faction" :data="data" :player="player" />
 
         <g transform="translate(29.3, 5)">
           <g v-for="i in [0, 1, 2, 3]" :key="i" :transform="`translate(${(i-2)*3.8}, 0)`">
