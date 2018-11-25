@@ -2,11 +2,11 @@
   <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
     <div class="text">
       <svg viewBox="-0.2 -0.2 45 22.5" class="player-board">
-        <BuildingGroup transform="translate(2.2, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" />
-        <BuildingGroup transform="translate(12, 14)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" />
-        <BuildingGroup transform="translate(0, 17)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" />
-        <BuildingGroup transform="translate(11, 17)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" />
-        <BuildingGroup transform="translate(0, 20)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" />
+        <BuildingGroup transform="translate(2.2, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" resource="pw" />
+        <BuildingGroup transform="translate(12, 14)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" resource="q" />
+        <BuildingGroup transform="translate(0, 17)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" resource="c" />
+        <BuildingGroup transform="translate(11, 17)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" resource="k" />
+        <BuildingGroup transform="translate(0, 20)" :nBuildings="8" building="m" :faction="player.faction" :placed="data.buildings.m" resource="o" />
       </svg>
       <b :class="['player-name', {dropped: player.dropped}]" @click="playerClick(player)">{{name}}</b> - <span v-b-modal="faction" class="faction-name" role="button">{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
       <br/>
