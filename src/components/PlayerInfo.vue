@@ -2,7 +2,7 @@
   <div :class="['player-info', 'no-gutters', player.faction]" v-if="player && player.faction" :style="`background-color: ${factionColor}`">
     <div class="text">
       <svg viewBox="-0.2 -0.2 45 22.5" class="player-board">
-        <BuildingGroup transform="translate(3.5, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" />
+        <BuildingGroup transform="translate(2.2, 14)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" />
         <BuildingGroup transform="translate(12, 14)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="data.buildings.ac1 + data.buildings.ac2" />
         <BuildingGroup transform="translate(0, 17)" :nBuildings="4" building="ts" :faction="player.faction" :placed="data.buildings.ts" />
         <BuildingGroup transform="translate(11, 17)" :nBuildings="3" building="lab" :faction="player.faction" :placed="data.buildings.lab" />
@@ -11,7 +11,7 @@
       <b :class="['player-name', {dropped: player.dropped}]" @click="playerClick(player)">{{name}}</b> - <span v-b-modal="faction" class="faction-name" role="button">{{faction}}</span> - {{data.victoryPoints}}vp <span v-if="passed">(passed)</span>
       <br/>
       <span :class="{maxResource: data.credits >= 30}">{{data.credits}}c<small>/30</small></span>, <span :class="{maxResource: data.ores >= 15}">{{data.ores}}o<small>/15</small></span>, <span :class="{maxResource: data.knowledge >= 15}">{{data.knowledge}}k<small>/15</small></span>, {{data.qics}}q, [{{power('gaia')}}] {{power('area1')}}/{{power('area2')}}/{{power('area3')}} pw<br/>
-      m: {{data.buildings.m}}/8, ts: {{data.buildings.ts}}/4, lab: {{data.buildings.lab}}/3<span v-if="data.buildings.PI">, PI</span><span v-if="data.buildings.ac1">, ac1</span><span v-if="data.buildings.ac2">, ac2</span>, gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
+      gf: <span  v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</span> {{data.buildings.gf}}/{{data.gaiaformers}}<br/>
       <span v-if="round<6">Income: {{player.income.replace(/,/g, ', ')}}<br/></span>
       Range: {{data.range}}, Terraforming cost: {{3 - data.terraformCostDiscount}}o<br/>
       <span v-if="faction === 'Ivits'">Fed value: {{player.fedValue }}, No fed value: {{player.structureValue - player.fedValue }} <br/></span> 

@@ -2,8 +2,10 @@
   <g>
     <rect :x="0" y="-1.2" :width=width height=2.4 stroke=black stroke-width=0.07 fill=none rx=0.2 ry=0.2 />
     <g v-for="i in buildingList" :transform="`translate(${(i+0.5)*buildingSpacing+offset}, 0)`" :key=i>
-      <circle stroke=black stroke-width=0.07 fill=white r=1  :key=i />
-      <Building :building="building" :faction="faction" transform="scale(1.4)" v-if="i >= placed" />
+      <circle stroke=black stroke-width=0.07 fill=white r=1  :key=i v-if="!isPI" />
+      <rect stroke=black stroke-width=0.07 fill=white :x="-2.2+offset" width=4 y=-1 height=2  :key=i v-else />
+      <Building :building="building" :faction="faction" :transform="`translate(${isPI ? 0.5 : 0}, 0) scale(1.5)`" v-if="i >= placed" />
+      <Resource v-for="(resource,index) in resources(i)" :key="'field-' + index"  :kind="resource.type" :count="resource.count" :transform="`translate(${index*1.5 + isPI*0.5}, 0) scale(0.08)`" />
     </g>
   </g>
 </template>
@@ -12,24 +14,38 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import Building from '../Building.vue';
+import Resource from '../Resource.vue';
+import {Building as BuildingEnum, Faction, Reward, FactionBoard, factionBoard, Operator} from '@gaia-project/engine';
 
 @Component({
   components: {
-    Building
+    Building,
+    Resource
+  },
+  watch: {
+    faction(newVal) {
+      this.board = factionBoard(newVal);
+    }
   }
 })
 export default class BuildingGroup extends Vue {
   @Prop()
   nBuildings: number;
   @Prop()
-  building: string;
+  building: BuildingEnum;
   @Prop()
-  faction: string;
+  faction: Faction;
   @Prop()
   placed: number;
 
+  board: FactionBoard = factionBoard(Faction.Terrans);
+
   get buildingList() {
     return [0,1,2,3,4,5,6,7].slice(0, this.nBuildings);
+  }
+
+  get isPI() {
+    return this.building === BuildingEnum.PlanetaryInstitute;
   }
 
   get offset() {
@@ -45,7 +61,15 @@ export default class BuildingGroup extends Vue {
   }
 
   get width() {
-    return this.nBuildings * this.buildingSpacing + this.offset + this.paddingRight;
+    return Math.max(this.nBuildings, 2) * this.buildingSpacing + this.offset + this.paddingRight;
+  }
+
+  resources(i: number) : Reward[] {
+    if (i >= this.placed) {
+      return [];
+    }
+
+    return [].concat(...this.board.buildings[this.building].income[i].filter(ev => ev.operator === Operator.Income).map(ev => ev.rewards));
   }
 }
 
