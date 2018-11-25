@@ -100,7 +100,14 @@ export default class BuildingGroup extends Vue {
       i = 0;
     }
 
-    return [].concat(...this.board.buildings[building].income[i].filter(ev => ev.operator === Operator.Income || ev.rewards.toString() === '1q').map(ev => ev.rewards));
+    return [].concat(...this.board.buildings[building].income[i].filter(ev => {
+      if (ev.operator === Operator.Income) {
+        return true;
+      } 
+      const rew = ev.rewards.toString();
+
+      return ev.operator === Operator.Activate && (rew === "1q" || rew === "4c");
+    }).map(ev => ev.rewards));
   }
 }
 
