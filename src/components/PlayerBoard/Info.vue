@@ -55,9 +55,9 @@
           <tspan v-if="data.gaiaformersInGaia>0">[{{data.gaiaformersInGaia}}]</tspan>
           <tspan>{{data.buildings.gf}}/{{data.gaiaformers}}</tspan>
         </text>
-        <text class="board-text" x=5>Sat: {{data.satellites}}</text>
-        <text class="board-text" x=9.3 v-if="spaceShips">Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
-        <text class="board-text" x=15 v-if="spaceShips">TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
+        <text class="board-text" x=6>Sat: {{data.satellites}}</text>
+        <text class="board-text" x=10.3 v-if="spaceShips">Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
+        <text class="board-text" x=16 v-if="spaceShips">TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
       </g>
     </g>
   </g>
