@@ -3,7 +3,7 @@
     <span @click="playerClick(player)" :class="['player-name', {dropped: player.dropped}]" role="button">{{name}}</span>
     <div class="board mt-2">
       <svg viewBox="-0.2 -0.5 38.5 21.4" class="player-board" :style="`background-color: ${factionColor}`">
-        <rect v-if="player.faction === 'bescods' || player.faction === 'firaks'" x=-1 y=-1 width=50 height=50 fill="#ffffff44"></rect>
+        <rect x=-1 y=-1 width=50 height=50 fill="#ffffff44"></rect>
         <PlayerBoardInfo transform="translate(0.5, 0.5)" :player="player" :faction="player.faction" :data="data" />
         <BuildingGroup transform="translate(2.2, 10)" :nBuildings="1" building="PI" :faction="player.faction" :placed="data.buildings.PI" :resource="['pw','t']" />
         <BuildingGroup transform="translate(12, 10)" :nBuildings="2" building="ac1" :faction="player.faction" :placed="0" :ac1="data.buildings.ac1" :ac2="data.buildings.ac2" :resource="['q']" />

@@ -35,6 +35,8 @@ export default class Resource extends Vue {
 
 
 <style lang="scss">
+@import '../stylesheets/planets.scss';
+
 g.resource {
   pointer-events: none;
   opacity: 0.7;
@@ -57,7 +59,7 @@ g.resource {
   }
 
   .credit {
-    fill: #e8de24;
+    fill: $desert;
   }
 
   .power {
