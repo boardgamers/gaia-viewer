@@ -10,7 +10,7 @@
     <g :transform="`translate(${2*r*sin60*spacing}, ${r*spacing})`">
       <circle :r=r fill="purple" />
       <text>{{power('area1')}}</text>
-      <text y=1.7 transform=scale(0.7)>+{{income('t')}}</text>
+      <text y=1.7 transform=scale(0.7) v-if="income('t')">+{{income('t')}}</text>
       <text class="label" y=2.6>I</text>
     </g>
     <g :transform="`translate(${-2*r*sin60*spacing}, ${r*spacing})`">
@@ -23,7 +23,7 @@
       <text>{{power('area3')}}</text>
       <text class="label" y=0 x=-3>III</text>
     </g>
-    <text class="label" transform="translate(0, 5) scale(0.7)">+{{income('pw')}}</text>
+    <text class="label" transform="translate(0, 5) scale(0.7)" v-if="income('pw')">+{{income('pw')}}</text>
   </g>
 </template>
 
