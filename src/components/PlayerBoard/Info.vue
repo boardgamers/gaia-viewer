@@ -21,18 +21,18 @@
       <g>
         <text class="board-text">R</text>
         <g transform="translate(2.2, 0)">
-          <Resource kind="c" :count="data.credits" transform="scale(0.08)"/>
-          <text :class="['board-text', {maxResource: data.ores >= 30}]" transform="translate(0.7,0) scale(0.7)">/30</text>
+          <Resource kind="c" :count="data.credits" transform="scale(0.1)"/>
+          <text :class="['board-text', {maxResource: data.ores >= 30}]" transform="translate(1,0) scale(0.7)">/30</text>
         </g>
         <g transform="translate(5.5, 0)">
-          <Resource kind="o" :count="data.ores" transform="scale(0.08)"/>
-          <text :class="['board-text', {maxResource: data.ores >= 15}]" transform="translate(0.7,0) scale(0.7)">/15</text>
+          <Resource kind="o" :count="data.ores" transform="scale(0.1)"/>
+          <text :class="['board-text', {maxResource: data.ores >= 15}]" transform="translate(1,0) scale(0.7)">/15</text>
         </g>
         <g transform="translate(9, 0)">
-          <Resource kind="k" :count="data.knowledge" transform="scale(0.08)"/>
-          <text :class="['board-text', {maxResource: data.knowledge >= 15}]" transform="translate(0.7,0) scale(0.7)">/15</text>
+          <Resource kind="k" :count="data.knowledge" transform="scale(0.1)"/>
+          <text :class="['board-text', {maxResource: data.knowledge >= 15}]" transform="translate(1,0) scale(0.7)">/15</text>
         </g>
-        <Resource kind="q" :count="data.qics" transform="translate(12.5,0) scale(0.08)"/>
+        <Resource kind="q" :count="data.qics" transform="translate(12.5,0) scale(0.1)"/>
       </g>
       <g transform="translate(0, 1.5)">
         <text class="board-text" x=0.25>I</text>
