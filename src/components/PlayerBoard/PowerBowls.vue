@@ -1,29 +1,29 @@
 <template>
   <g>
-    <line x1=0 y1=0 :x2="(isTerran ? -1 : 1)* 2*r*sin60*spacing" :y2=r*spacing stroke=black stroke-width=0.06px />
+    <line x1=0 y1=0 :x2="-r*spacing" :y2="(isTerran ? -1 : 1) *2*r*sin60*spacing" stroke=black stroke-width=0.06px />
     <circle :r=2*r*spacing fill=none />
     <g>
       <circle :r=r fill="green" />
       <text>{{power('gaia')}}</text>
       <text class="label" y=2.6>G</text>
     </g>
-    <g :transform="`translate(${2*r*sin60*spacing}, ${r*spacing})`">
+    <g :transform="`translate(${-r*spacing}, ${2*r*sin60*spacing})`">
       <circle :r=r fill="purple" />
       <text>{{power('area1')}}</text>
       <text y=1.7 transform=scale(0.7) v-if="income('t')">+{{income('t')}}</text>
-      <text class="label" y=2.6>I</text>
+      <text class="label" x=-2.6>I</text>
     </g>
-    <g :transform="`translate(${-2*r*sin60*spacing}, ${r*spacing})`">
+    <g :transform="`translate(${-r*spacing}, ${-2*r*sin60*spacing})`">
       <circle :r=r fill="purple" />
       <text>{{power('area2')}}</text>
-      <text class="label" y=2.6>II</text>
+      <text class="label" x=-2.6>II</text>
     </g>
-    <g :transform="`translate(0, ${-2*r*spacing})`">
+    <g :transform="`translate(${2*r*spacing}, 0)`">
       <circle :r=r fill="purple" />
       <text>{{power('area3')}}</text>
-      <text class="label" y=0 x=-3>III</text>
+      <text class="label" y=2.6 x=0>III</text>
     </g>
-    <text class="label" transform="translate(0, 5) scale(0.7)" v-if="income('pw')">+{{income('pw')}}</text>
+    <text class="label" transform="translate(-3.5, 0) scale(0.75)" v-if="income('pw')">+{{income('pw')}}</text>
   </g>
 </template>
 
