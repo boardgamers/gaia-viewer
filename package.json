@@ -17,7 +17,7 @@
     "public"
   ],
   "dependencies": {
-    "@gaia-project/engine": "^3.4.0",
+    "@gaia-project/engine": "^3.4.2",
     "hexagrid": "^2.0.1"
   },
   "devDependencies": {
