@@ -1,8 +1,6 @@
 <template>
   <g>
-    <circle :r="radius" :class='["planet-fill", planet ]' style="pointer-events: none;" />
-    <circle :r="radius" :class='["planet-fill", "faction-fill", fill ]' v-if="faction" style="pointer-events: none;" />
-    <circle :r='radius' :class='["planet", planet]' />
+    <image :width=2*radius :height=2*radius :x=-radius :y=-radius :xlink:href="`/images/planets/${fill}.svg`" />
   </g>
 </template>
 
@@ -10,7 +8,7 @@
 import Vue from 'vue';
 import planets from "../data/planets";
 import { Component, Prop } from 'vue-property-decorator';
-import { Planet as PlanetEnum, factions, Faction } from '@gaia-project/engine';
+import { Planet as PlanetEnum, factions, Faction, planetNames } from '@gaia-project/engine';
 
 @Component
 export default class Planet extends Vue {
@@ -24,11 +22,10 @@ export default class Planet extends Vue {
   }
 
   get fill() {
-    // Comment for planet staying planets!
-    if (this.faction) {
-      return factions.planet(this.faction);
+    if (this.faction && !this.$store.state.gaiaViewer.preferences?.noFactionFill) {
+      return planetNames[factions.planet(this.faction)];
     }
-    return this.planet;
+    return planetNames[this.planet];
   }
 }
 
@@ -43,7 +40,7 @@ svg {
     stroke-width: 0.04;
     fill: none;
     pointer-events: none;
-    
+
     // terra
     &.r {stroke: $terra }
     // desert
@@ -70,7 +67,7 @@ svg {
     .no-faction-fill &.faction-fill {
       display: none;
     }
-    
+
     // terra
     &.r {fill: $terra }
     // desert
@@ -91,6 +88,10 @@ svg {
     &.m {fill: $transdim}
     // lost planet
     &.l {fill: $lost}
+  }
+
+  .planet-image {
+    background-image: url("/images/planets/d.svg");
   }
 }
 
