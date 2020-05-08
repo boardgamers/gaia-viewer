@@ -1,6 +1,6 @@
 <template>
-  <g>
-    <image :width=2*radius :height=2*radius :x=-radius :y=-radius :xlink:href="`/images/planets/${fill}.svg`" />
+  <g transform="scale(0.12)">
+    <image class="planet-image" :width=16*radius :height=16*radius :x=-radius*8 :y=-radius*8 :xlink:href="`/images/planets/${fill}.svg`" />
   </g>
 </template>
 
@@ -91,7 +91,7 @@ svg {
   }
 
   .planet-image {
-    background-image: url("/images/planets/d.svg");
+    pointer-events: none;
   }
 }
 
