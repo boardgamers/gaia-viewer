@@ -207,7 +207,7 @@ export default class MoveButton extends Vue {
         command = command.replace(/\b[0-9]+/g, x => ('' + (parseInt(x) * times)));
       }
 
-      command = command.replace(/\b\amount\b/g, '' + (times ?? 0));
+      command = command.replace(/\$times\b/g, '' + (times ?? 0));
 
       commandBody = [command, append].filter(x => !!x);
     }
