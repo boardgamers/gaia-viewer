@@ -205,9 +205,9 @@ export default class MoveButton extends Vue {
       if (times && typeof times === "number") {
         // the \b is necessary for things like '1t-a3', so the 3 is not caught
         command = command.replace(/\b[0-9]+/g, x => ('' + (parseInt(x) * times)));
-        // this is used for bids. 
-        command = command.replace(/0+/g, x => ('' + times));
       }
+
+      command = command.replace(/\b\amount\b/g, '' + (times ?? 0));
 
       commandBody = [command, append].filter(x => !!x);
     }
