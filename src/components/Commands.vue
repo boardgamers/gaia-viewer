@@ -296,11 +296,7 @@ export default class Commands extends Vue {
                 label: `Booster ${i + 1}`,
                 booster: true,
                 needConfirm: true,
-                tooltip: tiles.boosters[booster].map(spec => eventDesc(new Event(spec))).join("\n"),
-                buttons: [{
-                  command: "",
-                  label: `Confirm Booster ${i + 1}`
-                }]
+                tooltip: tiles.boosters[booster].map(spec => eventDesc(new Event(spec))).join("\n")
               });
             }
           });
