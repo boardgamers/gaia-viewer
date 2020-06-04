@@ -25,6 +25,7 @@ export interface ButtonData {
 
   buttons?: ButtonData[];
   hide?: boolean;
+  booster?: boolean;
 }
 
 export type MapData = GaiaHex[];
