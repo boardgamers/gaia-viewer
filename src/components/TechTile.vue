@@ -1,8 +1,8 @@
 <template>
-  <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="58" height="37" viewBox="0 0 58 37">
-    <polygon points="1,1 48,1 57,11 57,36 1,36" />
-    <text class="title" x="4" y="12">{{title}}</text>
-    <text :class="['content', {smaller: content.length >= 10}]" x="4" y="30">{{content}}</text>
+  <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-31 -31 62 62">
+    <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
+    <text class="title" x="-25" y="-15">{{title}}</text>
+    <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0">{{content}}</text>
   </svg>
 </template>
 
@@ -12,47 +12,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 
-@Component<TechTile>({
-  computed: {
-    tileObject () {
-      return this.$store.state.gaiaViewer.data.tiles.techs[this.pos];
-    },
-
-    tile () {
-      return this.tileObject.tile;
-    },
-
-    count () {
-      if (this.player !== undefined) {
-        return 1;
-      }
-      return this.tileObject.count;
-    },
-
-    rawContent () {
-      return tiles.techs[this.tile][0];
-    },
-
-    content () {
-      const val = this.rawContent;
-
-      return val.length > 10 && val[0] !== '=' ? val.replace(/ /g, '') : val;
-    },
-
-    title () {
-      // Only show count if there are more players than tech tiles available
-      if (this.count > 1 && this.$store.state.gaiaViewer.data.players.length > 4) {
-        return `${this.pos} (${this.count})`;
-      }
-
-      return this.pos;
-    },
-
-    tooltip () {
-      return eventDesc(new Event(this.rawContent));
-    }
-  }
-})
+@Component
 export default class TechTile extends Vue {
   @Prop()
   pos: TechTilePos | AdvTechTilePos;
@@ -71,6 +31,48 @@ export default class TechTile extends Vue {
 
   get highlighted () {
     return this.$store.state.gaiaViewer.context.highlighted.techs.has(this.pos);
+  }
+
+  get tileObject () {
+    return this.$store.state.gaiaViewer.data.tiles.techs[this.pos];
+  }
+
+  get tile () {
+    return this.tileObject.tile;
+  }
+
+  get count () {
+    if (this.player !== undefined) {
+      return 1;
+    }
+    return this.tileObject.count;
+  }
+
+  get rawContent () {
+    return tiles.techs[this.tile][0];
+  }
+
+  get content () {
+    const val = this.rawContent;
+
+    return val.length > 10 && val[0] !== '=' ? val.replace(/ /g, '') : val;
+  }
+
+  get title () {
+    // Only show count if there are more players than tech tiles available
+    if (this.count > 1 && this.$store.state.gaiaViewer.data.players.length > 4) {
+      return `${this.pos} (${this.count})`;
+    }
+
+    return this.pos;
+  }
+
+  get isAdvanced () {
+    return this.pos.startsWith("adv-");
+  }
+
+  get tooltip () {
+    return eventDesc(new Event(this.rawContent));
   }
 }
 
