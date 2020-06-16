@@ -7,7 +7,8 @@ import Game from './components/Game.vue';
 function launchSelfContained (selector = "#app", debug = true) {
   const emitter = launch(selector, debug ? Wrapper : Game);
 
-  let engine = new Engine();
+  let engine = new Engine(["init 3 randomSeed"], {});
+  engine.generateAvailableCommandsIfNeeded();
 
   const unsub = emitter.store.subscribeAction(({ payload, type }) => {
     if (type === "gaiaViewer/loadFromJSON") {
@@ -35,6 +36,8 @@ function launchSelfContained (selector = "#app", debug = true) {
 
     emitter.emit("state", JSON.parse(JSON.stringify(copy)));
   });
+
+  emitter.emit("state", JSON.parse(JSON.stringify(engine)));
 }
 
 export default launchSelfContained;

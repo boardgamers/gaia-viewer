@@ -4337,11 +4337,6 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-hexagrid@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/hexagrid/-/hexagrid-2.0.1.tgz#87920c341df19c20bb8dd95707f4691ad27882cc"
-  integrity sha512-zSsMdZSEZ3oAb8yee4cUenB5kuVckpy14lJ9D5MtTYEoFqwTnZLu81Vv+kfA8vlLXCW+84TuMtda5CQomBCAeg==
-
 hexagrid@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/hexagrid/-/hexagrid-2.1.0.tgz#3b7ea6f713ddfd434e737531087f161a1bacffc9"

@@ -44,7 +44,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
-    "hexagrid": "^2.0.1",
+    "hexagrid": "^2.1.0",
     "node-sass": "^4.7.2",
     "popper": "^1.0.1",
     "popper.js": "^1.16.1",
