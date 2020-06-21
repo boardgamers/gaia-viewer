@@ -1,18 +1,24 @@
 <template>
   <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-31 -31 62 62">
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
-    <text class="title" x="-25" y="-15">{{title}}</text>
+    <text class="title" x="-25" y="-18">{{title}}</text>
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0">{{content}}</text>
+    <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
   </svg>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos } from '@gaia-project/engine';
+import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
+import Resource from './Resource.vue';
 
-@Component
+@Component({
+  components: {
+    Resource
+  }
+})
 export default class TechTile extends Vue {
   @Prop()
   pos: TechTilePos | AdvTechTilePos;
@@ -39,6 +45,18 @@ export default class TechTile extends Vue {
 
   get tile () {
     return this.tileObject.tile;
+  }
+
+  get event () {
+    return new Event(this.rawContent);
+  }
+
+  get cornerReward () {
+    if (this.event.operator === Operator.Trigger || this.event.operator === Operator.Pass || (this.event.operator === Operator.Once && this.event.condition !== Condition.None)) {
+      return this.event.rewards[0];
+    }
+
+    return null;
   }
 
   get count () {
@@ -72,7 +90,7 @@ export default class TechTile extends Vue {
   }
 
   get tooltip () {
-    return eventDesc(new Event(this.rawContent));
+    return eventDesc(this.event);
   }
 }
 
@@ -82,6 +100,7 @@ export default class TechTile extends Vue {
 
 svg {
   &.techTile {
+    overflow: visible;
     polygon {
       stroke: #333;
       stroke-width: 1px;
@@ -91,10 +110,13 @@ svg {
       font-size: 10px;
       font-weight: bold;
       pointer-events: none;
+      fill: white;
+      display: none;
     }
     .content {
       font-size: 11px;
       pointer-events: none;
+      fill: white;
 
       &.smaller {
         font-size: 9px;

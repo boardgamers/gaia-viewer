@@ -120,7 +120,7 @@ export default class Game extends Vue {
   }
 
   get scoringX () {
-    return this.engine.expansions ? 505 : 385;
+    return this.engine.expansions ? 535 : 415;
   }
 
   get orderedPlayers () {
