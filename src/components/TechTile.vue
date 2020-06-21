@@ -3,6 +3,7 @@
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
     <text class="title" x="-25" y="-18">{{title}}</text>
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0">{{content}}</text>
+    <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
   </svg>
 </template>
@@ -13,10 +14,12 @@ import { Component, Prop } from 'vue-property-decorator';
 import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
+import SpecialAction from './SpecialAction.vue';
 
 @Component({
   components: {
-    Resource
+    Resource,
+    SpecialAction
   }
 })
 export default class TechTile extends Vue {
@@ -57,6 +60,14 @@ export default class TechTile extends Vue {
     }
 
     return null;
+  }
+
+  get isAction () {
+    return this.event.operator === Operator.Activate;
+  }
+
+  get rewards () {
+    return this.event.rewards;
   }
 
   get count () {
@@ -101,11 +112,6 @@ export default class TechTile extends Vue {
 svg {
   &.techTile {
     overflow: visible;
-    polygon {
-      stroke: #333;
-      stroke-width: 1px;
-      fill: white;
-    }
     .title {
       font-size: 10px;
       font-weight: bold;

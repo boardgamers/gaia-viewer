@@ -1,12 +1,8 @@
 <template>
   <svg viewBox="-25 -25 50 50" width="50" height="50">
     <g :class='["specialAction", {highlighted, disabled}]'>
-      <polygon points="-1,0.5 -0.5,1 0.5,1 1,0.5 1,-0.5 0.5,-1 -0.5,-1 -1,-0.5" transform="scale(24)" @click="onClick" />
-      <text>
-        <tspan x="0" v-for="(line, i) in income" :dy="`${i === 0 ? - 0.5*(income.length - 1)*11 : 11}px`" :key="i">
-          {{line.replace(/ /g, '')}}
-        </tspan>
-      </text>
+      <polygon points="-10,4 -4,10 4,10 10,4 10,-4 4,-10 -4,-10 -10,-4" transform="scale(2.4)" @click="onClick" />
+      <Resource v-for="(reward, i) in rewards" :key=i :count=reward.count :kind=reward.type :transform="`translate(${rewards.length > 1 ? (i - 0.5) * 20  : 0}, 0), scale(1.5)`" />
     </g>
   </svg>
 </template>
@@ -14,18 +10,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { tiles, Event } from '@gaia-project/engine';
+import { tiles, Event, Reward } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
+import Resource from './Resource.vue';
 
-@Component<SpecialAction>({
-  computed: {
-    income () {
-      return this.action.includes(',') ? this.action.split(',') : this.action.split('-');
-    }
+@Component({
+  components: {
+    Resource
   }
 })
 export default class SpecialAction extends Vue {
-  @Prop()
+  @Prop({ default: false })
   disabled: boolean;
 
   @Prop()
@@ -36,6 +31,15 @@ export default class SpecialAction extends Vue {
       return;
     }
     this.$store.dispatch("gaiaViewer/actionClick", this.action);
+  }
+
+  get income () {
+    return this.action.includes(',') ? this.action.split(',') : this.action.split('-');
+  }
+
+  get rewards () {
+    console.log(Reward.parse(this.action), this.action);
+    return Reward.parse(this.action);
   }
 
   get highlighted () {
@@ -53,14 +57,6 @@ g {
       stroke: #333;
       stroke-width: 0.02;
       fill: orange;
-    }
-
-    text {
-      fill: white;
-      text-anchor: middle;
-      dominant-baseline: middle;
-      font-size: 12px;
-      pointer-events: none;
     }
 
     &.highlighted polygon {
