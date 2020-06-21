@@ -1,11 +1,11 @@
 <template>
   <g :class='["building", "planet-fill", planet]'>
-    <rect v-if="mine" x="-0.2" y="-0.2" width="0.4" height="0.4" />
-    <rect v-else-if="planetaryInstitute" x="-0.375" y="-0.375" width="0.75" height="0.75" />
+    <Mine v-if="mine" />
+    <PlanetaryInstitute v-else-if="planetaryInstitute" />
     <polygon v-else-if="gaiaFormer" :points='hexCorners' />
-    <circle v-else-if="lab" r="0.3" />
-    <circle v-else-if="academy" r="0.5" />
-    <polygon v-else-if="tradingStation" points="-0.2,-0.2 0,-0.38 0.2,-0.2 0.2,0.2 -0.2,0.2" transform="translate(0, 0.08)"/>
+    <ResearchLab v-else-if="lab" />
+    <Academy v-else-if="academy" />
+    <TradingStation v-else-if="tradingStation" />
     <Token v-else-if="spaceStation" :faction="faction" :scale="0.3" />
   </g>
 </template>
@@ -15,11 +15,21 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { factions, Faction, Building as BuildingEnum, Planet } from '@gaia-project/engine';
 import { corners } from '../graphics/hex';
+import Academy from './Buildings/Academy.vue';
+import Mine from './Buildings/Mine.vue';
+import PlanetaryInstitute from './Buildings/PlanetaryInstitute.vue';
+import ResearchLab from './Buildings/ResearchLab.vue';
 import Token from './Token.vue';
+import TradingStation from './Buildings/TradingStation.vue';
 
 @Component({
   components: {
-    Token
+    Academy,
+    Mine,
+    PlanetaryInstitute,
+    ResearchLab,
+    Token,
+    TradingStation
   }
 })
 export default class Building extends Vue {
