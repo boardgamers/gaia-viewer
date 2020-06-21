@@ -7,7 +7,7 @@
     <ResearchTile y="113" :level="4" :field="field" />
     <ResearchTile y="0" :level="5" :field="field" />
     <g v-if="$store.state.gaiaViewer.data.tiles && $store.state.gaiaViewer.data.tiles.techs['gaia']">
-      <TechTile :pos="'adv-'+field" y="53" x="1" />
+      <TechTile :pos="'adv-'+field" y="51.5" x="1" />
       <TechTile :pos="field" y="341" x="1" />
     </g>
   </g>

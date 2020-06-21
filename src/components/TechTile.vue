@@ -1,5 +1,5 @@
 <template>
-  <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-31 -31 62 62">
+  <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-32 -32 64 64">
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
     <text class="title" x="-25" y="-18">{{title}}</text>
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0">{{content}}</text>
