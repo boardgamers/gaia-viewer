@@ -1,12 +1,12 @@
 <template>
   <g :class='["building", "planet-fill", planet]'>
-    <Mine v-if="mine" transform="scale(0.1)" />
-    <PlanetaryInstitute v-else-if="planetaryInstitute" transform="scale(0.1)" />
-    <GaiaFormer v-else-if="gaiaFormer" transform="scale(0.1)" />
-    <ResearchLab v-else-if="lab" transform="scale(0.1)" />
-    <Academy v-else-if="academy" transform="scale(0.1)" />
-    <TradingStation v-else-if="tradingStation" transform="scale(0.1)" />
-    <SpaceStation v-else-if="spaceStation" :faction="faction" transform="scale(0.1)" />
+    <Mine v-if="mine" transform="scale(0.01)" filter="url(#outline)" />
+    <PlanetaryInstitute v-else-if="planetaryInstitute" transform="scale(0.01)" filter="url(#outline)" />
+    <GaiaFormer v-else-if="gaiaFormer" transform="scale(0.01)" filter="url(#outline)" />
+    <ResearchLab v-else-if="lab" transform="scale(0.01)"  filter="url(#outline)" />
+    <Academy v-else-if="academy" transform="scale(0.01)" filter="url(#outline)" />
+    <TradingStation v-else-if="tradingStation" transform="scale(0.01)" filter="url(#outline)" />
+    <SpaceStation v-else-if="spaceStation" :faction="faction" transform="scale(0.01)" filter="url(#outline)" />
   </g>
 </template>
 
