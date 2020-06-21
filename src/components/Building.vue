@@ -1,12 +1,12 @@
 <template>
   <g :class='["building", "planet-fill", planet]'>
-    <Mine v-if="mine" />
-    <PlanetaryInstitute v-else-if="planetaryInstitute" />
-    <polygon v-else-if="gaiaFormer" :points='hexCorners' />
-    <ResearchLab v-else-if="lab" />
-    <Academy v-else-if="academy" />
-    <TradingStation v-else-if="tradingStation" />
-    <Token v-else-if="spaceStation" :faction="faction" :scale="0.3" />
+    <Mine v-if="mine" transform="scale(0.1)" />
+    <PlanetaryInstitute v-else-if="planetaryInstitute" transform="scale(0.1)" />
+    <GaiaFormer v-else-if="gaiaFormer" transform="scale(0.1)" />
+    <ResearchLab v-else-if="lab" transform="scale(0.1)" />
+    <Academy v-else-if="academy" transform="scale(0.1)" />
+    <TradingStation v-else-if="tradingStation" transform="scale(0.1)" />
+    <SpaceStation v-else-if="spaceStation" :faction="faction" transform="scale(0.1)" />
   </g>
 </template>
 
@@ -16,18 +16,22 @@ import { Component, Prop } from 'vue-property-decorator';
 import { factions, Faction, Building as BuildingEnum, Planet } from '@gaia-project/engine';
 import { corners } from '../graphics/hex';
 import Academy from './Buildings/Academy.vue';
+import GaiaFormer from './Buildings/GaiaFormer.vue';
 import Mine from './Buildings/Mine.vue';
 import PlanetaryInstitute from './Buildings/PlanetaryInstitute.vue';
 import ResearchLab from './Buildings/ResearchLab.vue';
+import SpaceStation from './Buildings/SpaceStation.vue';
 import Token from './Token.vue';
 import TradingStation from './Buildings/TradingStation.vue';
 
 @Component({
   components: {
     Academy,
+    GaiaFormer,
     Mine,
     PlanetaryInstitute,
     ResearchLab,
+    SpaceStation,
     Token,
     TradingStation
   }
@@ -41,14 +45,6 @@ export default class Building extends Vue {
 
   get planet () {
     return (this.faction as any === "wild") ? Planet.Transdim : factions.planet(this.faction);
-  }
-
-  get hexCorners () {
-    return corners().map(({ x, y }) => `${x * 0.4},${y * 0.4}`).join(" ");
-  }
-
-  get triangleCorners () {
-    return [{ x: -0.5, y: Math.sqrt(3) / 4 }, { x: 0.5, y: Math.sqrt(3) / 4 }, { x: 0, y: -Math.sqrt(3) / 4 }].map(({ x, y }) => `${x * 0.5},${y * 0.5}`).join(" ");
   }
 
   get mine () { return this.building === BuildingEnum.Mine; }

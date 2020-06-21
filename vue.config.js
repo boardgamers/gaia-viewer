@@ -10,7 +10,8 @@ if (process.argv.includes("lib")) {
       config.externals({
         'bootstrap-vue': 'BootstrapVue'
       });
-    }
+    },
+    publicPath: "./"
   };
 } else {
   module.exports = {
