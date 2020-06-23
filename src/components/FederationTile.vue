@@ -6,7 +6,7 @@
       <text x="16.5" y="-15.5" v-if="numTiles>1">
           {{numTiles}}
       </text>
-      <text>
+      <text v-if="federation !== undefined">
         <tspan x="0" v-for="(line, i) in income" :key="i" :dy="`${i*1.5 - (income.length - 1) / 2.2}em`">
           {{line.replace(/ /g, '')}}
         </tspan>
@@ -21,18 +21,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import { tiles, Event, Federation as FederationEnum, PlayerEnum } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 
-@Component<FederationTile>({
-  computed: {
-    income () {
-      const [first, ...others] = tiles.federations[this.federation].split(",");
-      return others.length > 0 ? [first, others.join(", ")] : first.split("-");
-    },
-
-    disabled () {
-      return this.used || this.federation === FederationEnum.Fed1;
-    }
-  }
-})
+@Component
 export default class FederationTile extends Vue {
   @Prop()
   federation: FederationEnum;
@@ -42,6 +31,15 @@ export default class FederationTile extends Vue {
 
   @Prop()
   numTiles: number;
+
+  get income () {
+    const [first, ...others] = tiles.federations[this.federation].split(",");
+    return others.length > 0 ? [first, others.join(", ")] : first.split("-");
+  }
+
+  get disabled () {
+    return this.used || this.federation === FederationEnum.Fed1;
+  }
 
   onClick () {
     if (!this.highlighted) {

@@ -93,8 +93,10 @@ export default class TechTile extends Vue {
       return false;
     }
 
-    if (this.event.operator === Operator.Once && this.event.condition === ConditionEnum.None) {
-      return false;
+    if (this.event.operator === Operator.Once) {
+      if (this.event.condition === ConditionEnum.None || this.event.condition === ConditionEnum.Federation) {
+        return false;
+      }
     }
 
     return true;
