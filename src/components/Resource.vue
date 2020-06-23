@@ -1,7 +1,7 @@
 <template>
   <g class="resource">
     <template v-if="kind === 'q'" >
-      <Qic class="qic" width="20" height="20" :x="((i - 1) + 0.5 - 1 - count/2 + (centerLeft ? count/2 - 0.5 : 0)) * 10" y="-10" :key=i v-for="i in count" />
+      <Qic class="qic" :transform="`scale(0.85) translate(${((i - 1) + 0.5 - count/2 + (centerLeft ? count/2 - 0.5 : 0)) * 12}, 0)`" y="-10" :key=i v-for="i in count" />
     </template>
     <!-- <rect v-if="kind=='q'" class="qic" width="14" height="14" x="-7" y="-7" /> -->
     <rect v-else-if="kind=='o'" class="ore" width="14" height="14" x="-7" y="-7" />

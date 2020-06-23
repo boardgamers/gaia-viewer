@@ -6,8 +6,16 @@
     <Condition :condition=condition transform=scale(1.5) />
     <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
-    <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 25 : 0 }, 0) scale(1.5)`" />
+    <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(1.5)`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
+    <template v-if="event.operator === 'PA->4pw'">
+      <Building building="PI" transform="translate(-14, -8) scale(27) " />
+      <Building building="ac1" transform="translate(14, -8) scale(27)" />
+      <Resource kind="pw" transform="translate(-20, 18) scale(0.8)" />
+      <Resource kind="pw" transform="translate(-6.66, 18) scale(0.8)" />
+      <Resource kind="pw" transform="translate(6.66, 18) scale(0.8)" />
+      <Resource kind="pw" transform="translate(20, 18) scale(0.8)" />
+    </template>
     <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle" x="-14" v-if="event.operator === '+'">+</text>
   </svg>
 </template>
@@ -15,14 +23,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition as ConditionEnum, Building } from '@gaia-project/engine';
+import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition as ConditionEnum, Building as BuildingEnum } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
-import SpecialAction from './SpecialAction.vue';
+import Building from './Building.vue';
 import Condition from './Condition.vue';
+import SpecialAction from './SpecialAction.vue';
 
 @Component({
   components: {
+    Building,
     Condition,
     Resource,
     SpecialAction
@@ -89,12 +99,12 @@ export default class TechTile extends Vue {
   }
 
   get showText () {
-    if (this.event.operator === Operator.Activate || this.event.operator === Operator.Income) {
+    if (this.event.operator === Operator.Activate || this.event.operator === Operator.Income || this.event.operator === Operator.Special) {
       return false;
     }
 
     if (this.event.operator === Operator.Once) {
-      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(Building)].includes(this.event.condition as any)) {
+      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
         return false;
       }
     }
