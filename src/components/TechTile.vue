@@ -3,7 +3,7 @@
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
     <!--<text class="title" x="-25" y="-18">{{title}}</text>-->
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
-    <Condition :condition=condition />
+    <Condition :condition=condition transform=scale(1.5) />
     <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 25 : 0 }, 0) scale(1.5)`" />
@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition as ConditionEnum } from '@gaia-project/engine';
+import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition as ConditionEnum, Building } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
 import SpecialAction from './SpecialAction.vue';
@@ -94,7 +94,7 @@ export default class TechTile extends Vue {
     }
 
     if (this.event.operator === Operator.Once) {
-      if (this.event.condition === ConditionEnum.None || this.event.condition === ConditionEnum.Federation) {
+      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(Building)].includes(this.event.condition as any)) {
         return false;
       }
     }
