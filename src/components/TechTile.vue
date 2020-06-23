@@ -1,8 +1,9 @@
 <template>
   <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-32 -32 64 64">
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
-    <text class="title" x="-25" y="-18">{{title}}</text>
+    <!--<text class="title" x="-25" y="-18">{{title}}</text>-->
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
+    <Condition :condition=condition />
     <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 25 : 0 }, 0) scale(1.5)`" />
@@ -14,13 +15,15 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition } from '@gaia-project/engine';
+import { tiles, PlayerEnum, Event, TechTilePos, AdvTechTilePos, Operator, Condition as ConditionEnum } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
 import SpecialAction from './SpecialAction.vue';
+import Condition from './Condition.vue';
 
 @Component({
   components: {
+    Condition,
     Resource,
     SpecialAction
   }
@@ -58,7 +61,7 @@ export default class TechTile extends Vue {
   }
 
   get cornerReward () {
-    if (this.event.operator === Operator.Trigger || this.event.operator === Operator.Pass || (this.event.operator === Operator.Once && this.event.condition !== Condition.None)) {
+    if (this.event.operator === Operator.Trigger || this.event.operator === Operator.Pass || (this.event.operator === Operator.Once && this.event.condition !== ConditionEnum.None)) {
       return this.event.rewards[0];
     }
 
@@ -66,11 +69,15 @@ export default class TechTile extends Vue {
   }
 
   get centerRewards () {
-    if (this.event.operator === Operator.Once && this.event.condition === Condition.None) {
+    if (this.event.operator === Operator.Once && this.event.condition === ConditionEnum.None) {
       return this.event.rewards;
     }
 
     return [];
+  }
+
+  get condition () {
+    return this.event.condition;
   }
 
   get rightRewards () {
@@ -86,7 +93,7 @@ export default class TechTile extends Vue {
       return false;
     }
 
-    if (this.event.operator === Operator.Once && this.event.condition === Condition.None) {
+    if (this.event.operator === Operator.Once && this.event.condition === ConditionEnum.None) {
       return false;
     }
 
@@ -148,7 +155,6 @@ svg {
       font-weight: bold;
       pointer-events: none;
       fill: white;
-      display: none;
     }
     .content {
       font-size: 11px;
