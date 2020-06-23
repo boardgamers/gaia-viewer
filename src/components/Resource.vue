@@ -8,7 +8,7 @@
     <g v-else-if="kind=='vp'" transform="translate(-8,-8)" class="vp">
       <VictoryPoint width="16" height="16" />
     </g>
-    <Building v-else-if="kind=='gf'" faction="ivits" building="gf" transform="translate(0.5, 0) scale(20)" style="fill: none !important" />
+    <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(20)" :outline=true />
     <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
     <text x="0" y="0" v-if="['o','c','q','k','pw','t','vp','ship'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{count}}</text>
    </g>

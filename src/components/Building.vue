@@ -1,28 +1,31 @@
 <template>
-  <g :class='["building", "planet-fill", planet]'>
-    <Mine v-if="mine" transform="scale(0.01)" filter="url(#outline)" />
-    <PlanetaryInstitute v-else-if="planetaryInstitute" transform="scale(0.01)" filter="url(#outline)" />
-    <GaiaFormer v-else-if="gaiaFormer" transform="scale(0.01)" filter="url(#outline)" />
-    <ResearchLab v-else-if="lab" transform="scale(0.01)"  filter="url(#outline)" />
-    <Academy v-else-if="academy" transform="scale(0.01)" filter="url(#outline)" />
-    <TradingStation v-else-if="tradingStation" transform="scale(0.01)" filter="url(#outline)" />
-    <SpaceStation v-else-if="spaceStation" :faction="faction" transform="scale(0.01)" filter="url(#outline)" />
+  <g :class='["building"]' :style="faction ? `filter: url(#color-${faction})` : ''">
+    <component :is="buildingComponent" :filter="outline ? 'url(#outline)' : ''" />
   </g>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { factions, Faction, Building as BuildingEnum, Planet } from '@gaia-project/engine';
-import { corners } from '../graphics/hex';
+import { Faction, Building as BuildingEnum } from '@gaia-project/engine';
 import Academy from './Buildings/Academy.vue';
 import GaiaFormer from './Buildings/GaiaFormer.vue';
 import Mine from './Buildings/Mine.vue';
 import PlanetaryInstitute from './Buildings/PlanetaryInstitute.vue';
 import ResearchLab from './Buildings/ResearchLab.vue';
 import SpaceStation from './Buildings/SpaceStation.vue';
-import Token from './Token.vue';
 import TradingStation from './Buildings/TradingStation.vue';
+
+const components = {
+  [BuildingEnum.Mine]: "Mine",
+  [BuildingEnum.TradingStation]: "TradingStation",
+  [BuildingEnum.GaiaFormer]: "GaiaFormer",
+  [BuildingEnum.SpaceStation]: "SpaceStation",
+  [BuildingEnum.Academy1]: "Academy",
+  [BuildingEnum.Academy2]: "Academy",
+  [BuildingEnum.PlanetaryInstitute]: "PlanetaryInstitute",
+  [BuildingEnum.ResearchLab]: "ResearchLab"
+};
 
 @Component({
   components: {
@@ -32,7 +35,6 @@ import TradingStation from './Buildings/TradingStation.vue';
     PlanetaryInstitute,
     ResearchLab,
     SpaceStation,
-    Token,
     TradingStation
   }
 })
@@ -43,17 +45,12 @@ export default class Building extends Vue {
   @Prop()
   building: BuildingEnum;
 
-  get planet () {
-    return (this.faction as any === "wild") ? Planet.Transdim : factions.planet(this.faction);
-  }
+  @Prop({ default: false })
+  outline: boolean;
 
-  get mine () { return this.building === BuildingEnum.Mine; }
-  get tradingStation () { return this.building === BuildingEnum.TradingStation; }
-  get planetaryInstitute () { return this.building === BuildingEnum.PlanetaryInstitute; }
-  get lab () { return this.building === BuildingEnum.ResearchLab; }
-  get academy () { return this.building === BuildingEnum.Academy1 || this.building === BuildingEnum.Academy2; }
-  get gaiaFormer () { return this.building === BuildingEnum.GaiaFormer; }
-  get spaceStation () { return this.building === BuildingEnum.SpaceStation; }
+  get buildingComponent () {
+    return components[this.building];
+  }
 }
 
 </script>
@@ -65,6 +62,10 @@ svg {
     stroke-width: 0.1;
     pointer-events: none;
     stroke: #111;
+
+    & > * {
+      transform: scale(0.01);
+    }
   }
 
   .additionalMine {
