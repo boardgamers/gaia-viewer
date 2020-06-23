@@ -4,7 +4,7 @@
     <rect v-else-if="kind=='o'" class="ore" width="14" height="14" x="-7" y="-7" />
     <rect v-else-if="kind=='c'" class="credit" width="16" height="16" ry="8" rx="8" x="-8" y="-8" />
     <rect v-else-if="kind=='pw' || kind=='t'" class="power" width="15" height="15" ry="7.5" rx="7.5" x="-7.5" y="-7.5" />
-    <polygon points="-7.5,3.75 -3.75,7.5 3.75,7.5 7.5,3.75 7.5,-3.75 3.75,-7.5 -3.75,-7.5 -7.5,-3.75"  v-else-if="kind=='k'" class="planet-fill r" stroke=#333 />
+    <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3"  v-else-if="kind=='k'" class="planet-fill r knowledge" />
     <g v-else-if="kind=='vp'" transform="translate(-8,-8)" class="vp">
       <VictoryPoint width="16" height="16" />
     </g>
@@ -44,8 +44,8 @@ export default class Resource extends Vue {
 g.resource {
   pointer-events: none;
 
-  rect {
-    stroke: #333;
+  rect, .knowledge {
+    stroke: #111;
     stroke-width: 0.8px;
   }
 
@@ -54,7 +54,7 @@ g.resource {
   }
 
   .ore {
-    fill: #bbb;
+    fill: #ddd;
   }
 
   .credit {
@@ -62,7 +62,7 @@ g.resource {
   }
 
   .power {
-    fill: #a41894;
+    fill: #984FF1;
   }
 
   .building {
@@ -78,14 +78,15 @@ g.resource {
   text {
     font-size: 10px;
     fill: white;
+    font-weight: 600;
     dominant-baseline: central;
     text-anchor: middle;
 
     &.plus {
-      font-size: 15px;
-      font-weight: bold;
+      font-size: 22px;
 
-      fill: #333;
+      stroke: #111;
+      fill: white;
     }
   }
 }

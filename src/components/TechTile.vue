@@ -2,9 +2,12 @@
   <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-32 -32 64 64">
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
     <text class="title" x="-25" y="-18">{{title}}</text>
-    <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0">{{content}}</text>
+    <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
     <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
+    <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 25 : 0 }, 0) scale(1.5)`" />
+    <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
+    <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle" x="-14" v-if="event.operator === '+'">+</text>
   </svg>
 </template>
 
@@ -60,6 +63,34 @@ export default class TechTile extends Vue {
     }
 
     return null;
+  }
+
+  get centerRewards () {
+    if (this.event.operator === Operator.Once && this.event.condition === Condition.None) {
+      return this.event.rewards;
+    }
+
+    return [];
+  }
+
+  get rightRewards () {
+    if (this.event.operator === Operator.Income) {
+      return this.event.rewards;
+    }
+
+    return [];
+  }
+
+  get showText () {
+    if (this.event.operator === Operator.Activate || this.event.operator === Operator.Income) {
+      return false;
+    }
+
+    if (this.event.operator === Operator.Once && this.event.condition === Condition.None) {
+      return false;
+    }
+
+    return true;
   }
 
   get isAction () {
