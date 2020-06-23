@@ -1,5 +1,5 @@
 <template>
   <g>
-    <image xlink:href="../../assets/research-lab.svg" width=80 x=-40 y=-40 />
+    <image xlink:href="../../assets/research-lab.svg" width=110 x=-60 y=-55 />
   </g>
 </template>

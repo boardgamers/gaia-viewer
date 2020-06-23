@@ -1,5 +1,5 @@
 <template>
   <g>
-    <image xlink:href="../../assets/trading-station.svg" width=90 x=-45 y=-60 />
+    <image xlink:href="../../assets/trading-station.svg" width=80 x=-40 y=-50 />
   </g>
 </template>

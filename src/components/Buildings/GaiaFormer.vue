@@ -1,5 +1,5 @@
 <template>
   <g>
-    <image xlink:href="../../assets/gaiaformer.svg" width=80 x=-40 y=-30 />
+    <image xlink:href="../../assets/gaiaformer.svg" width=80 x=-40 y=-20 />
   </g>
 </template>
