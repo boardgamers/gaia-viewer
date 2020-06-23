@@ -45,7 +45,7 @@ export default class Building extends Vue {
   @Prop()
   building: BuildingEnum;
 
-  @Prop({ default: false })
+  @Prop({ default: false, type: Boolean })
   outline: boolean;
 
   get buildingComponent () {

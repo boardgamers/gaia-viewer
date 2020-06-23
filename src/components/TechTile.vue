@@ -1,16 +1,16 @@
 <template>
   <svg :class='["techTile", {highlighted, covered}]' v-show="this.count" v-b-tooltip :title="tooltip" @click="onClick" width="60" height="60" viewBox="-32 -32 64 64">
-    <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#323232'" />
+    <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#444'" />
     <!--<text class="title" x="-25" y="-18">{{title}}</text>-->
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
     <Condition :condition=condition transform=scale(1.5) />
-    <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-25 width=50 height=50 x=-25 />
-    <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(29, -29), scale(1.5)" />
-    <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(1.5)`" />
+    <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-20 width=40 height=40 x=-20 />
+    <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(19.5, -19.5), scale(1.35)" />
+    <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
     <template v-if="event.operator === 'PA->4pw'">
-      <Building building="PI" transform="translate(-14, -8) scale(27) " />
-      <Building building="ac1" transform="translate(14, -8) scale(27)" />
+      <Building building="PI" transform="translate(-14, -8) scale(27) " outline />
+      <Building building="ac1" transform="translate(14, -8) scale(27)" outline />
       <Resource kind="pw" transform="translate(-20, 18) scale(0.8)" />
       <Resource kind="pw" transform="translate(-6.66, 18) scale(0.8)" />
       <Resource kind="pw" transform="translate(6.66, 18) scale(0.8)" />

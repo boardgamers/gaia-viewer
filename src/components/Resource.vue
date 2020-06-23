@@ -8,10 +8,10 @@
     <rect v-else-if="kind=='c'" class="credit" width="16" height="16" ry="8" rx="8" x="-8" y="-8" />
     <rect v-else-if="kind=='pw' || kind=='t'" class="power" width="15" height="15" ry="7.5" rx="7.5" x="-7.5" y="-7.5" />
     <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3"  v-else-if="kind=='k'" class="planet-fill r knowledge" />
-    <g v-else-if="kind=='vp'" transform="translate(-8,-8)" class="vp">
-      <VictoryPoint width="16" height="16" />
+    <g v-else-if="kind=='vp'" transform="translate(-7.5,-7.5)" class="vp">
+      <VictoryPoint width="15" height="15" />
     </g>
-    <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(20)" :outline=true />
+    <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(30)" outline />
     <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
     <text x="0" y="0" v-if="['o','c','k','pw','t','vp','ship'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{count}}</text>
    </g>

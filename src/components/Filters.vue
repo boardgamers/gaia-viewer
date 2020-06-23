@@ -1,7 +1,29 @@
 <template>
   <defs>
     <filter id="outline">
-      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="7"></feMorphology>
+      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5"></feMorphology>
+
+      <feFlood flood-color="black" flood-opacity="1" result="PINK"></feFlood>
+      <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
+
+      <feMerge>
+        <feMergeNode in="OUTLINE" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="outline-1">
+      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="1"></feMorphology>
+
+      <feFlood flood-color="black" flood-opacity="1" result="PINK"></feFlood>
+      <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
+
+      <feMerge>
+        <feMergeNode in="OUTLINE" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="outline-2">
+      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="2"></feMorphology>
 
       <feFlood flood-color="black" flood-opacity="1" result="PINK"></feFlood>
       <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
