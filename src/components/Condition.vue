@@ -4,7 +4,9 @@
     <Federation v-else-if="condition === 'fed'" width=25 x=-12.5 y=-26 :used=true />
     <PlanetType v-else-if="condition === 'pt'"  transform=scale(1.1) filter=url(#outline-1) />
     <Sector v-else-if="condition === 's'" transform=scale(1.5) />
-    <Planet v-else-if="condition === 'g'" planet="g" transform=scale(13) />
+    <g v-else-if="condition === 'g'" filter=url(#outline-1) >
+      <image xlink:href="../assets/conditions/planet.svg" width=25 x=-12 y=-11.5 filter="url(#color-planet-g)" transform="scale(-1,1)" />
+    </g>
     <Resource v-else-if="condition === 'step'" kind="step" />
     <g v-else-if="condition === 'mg'" transform="translate(-2,0)">
       <image xlink:href="../assets/conditions/planet-flat.svg" width=30 x=-12 y=-11.5 filter="url(#color-planet-g)" transform="scale(-1,-1)" />
