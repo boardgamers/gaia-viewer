@@ -24,6 +24,14 @@
     </template>
     <image v-else-if="kind === 'tech'" xlink:href='../assets/resources/tech.svg' width=22 x=-11 y=-8 />
     <Federation v-else-if="kind === 'fed'" width=20 x=-10 y=-25 :used=true />
+    <template v-else-if="kind === 'range'">
+      <image xlink:href="../assets/resources/flat-hex.svg" width=15 y=-9 x=-2 />
+      <image xlink:href="../assets/resources/flat-hex.svg" width=20 y=3 x=-10 />
+      <image xlink:href="../assets/resources/range-arrow.svg" width=9 y=-8 x=-2 transform="rotate(5)" />
+      <text v-if="count > 1" x=-7 y=-2.5 stroke="black" stroke-width=0.3 style="font-weight: bold; font-size: 15px; stroke-width: 0.7px" >
+        {{count}}
+      </text>
+    </template>
     <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' width=20 transform="translate(-9, -14)" />
 
     <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
