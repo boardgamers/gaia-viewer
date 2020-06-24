@@ -3,7 +3,13 @@
     <rect x=-30 y=-30 width=60 height=60 rx=3 ry=3 stroke="black" stroke-width=2 :fill="isAdvanced ? '#515FF8' : '#444'" />
     <!--<text class="title" x="-25" y="-18">{{title}}</text>-->
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
-    <Condition :condition=condition transform=scale(1.5) />
+    <Condition :condition=condition :transform="`translate(${event.operator==='>>'?5:0}, ${event.operator==='>>' ? 5 : (event.operator === '|' ? 2.5 : 0)}) scale(1.5)`" />
+    <template v-if="event.operator==='>>'">
+      <image xlink:href="../assets/operators/trigger.svg" width=15 transform=translate(-20,-24) />
+    </template>
+    <template v-else-if="event.operator === '|'">
+      <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-19.2,-19.5)" stroke=black stroke-width=1.5 />
+    </template>
     <SpecialAction v-if="isAction" :action="content.split('=>')[1].trim()" y=-20 width=40 height=40 x=-20 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(19.5, -19.5), scale(1.35)" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
@@ -103,8 +109,8 @@ export default class TechTile extends Vue {
       return false;
     }
 
-    if (this.event.operator === Operator.Once) {
-      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
+    if (this.event.operator === Operator.Once || this.event.operator === Operator.Trigger || this.event.operator === Operator.Pass) {
+      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
         return false;
       }
     }
