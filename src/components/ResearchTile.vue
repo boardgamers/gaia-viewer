@@ -28,7 +28,7 @@ import Resource from './Resource.vue';
       return `<b>Level ${this.level}:</b> ${descriptions[this.field][this.level]}`;
     },
     height () {
-      return (this.level === 0 || this.level === 5) ? 46 : 36;
+      return this.level === 5 ? 46 : 36;
     },
     federation (): Federation {
       if (this.level === 5) {

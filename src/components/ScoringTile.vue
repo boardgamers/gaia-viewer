@@ -3,7 +3,7 @@
     <text class="title" x="58" y="36">R{{round}}</text>
     <text class="content" x="5" y="31" v-if="!['ts','m'].includes(event.condition)">{{content.split(" ")[0]}}</text>
     <Condition :condition=event.condition transform="translate(34, 22) scale(1.3)" />
-    <Operator :condition=event.condition :operator=event.operator transform="translate(27, 23) scale(0.8)" />
+    <Operator :condition=event.condition :operator=event.operator transform="translate(28, 27) scale(1)" />
     <Resource :kind=reward.type :count=reward.count transform="translate(64.5, 12.4) scale(1.5)" />
     <rect x="1" y="1" width="75" height="40" rx=2 ry=2 />
   </g>
