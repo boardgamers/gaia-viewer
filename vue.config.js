@@ -1,5 +1,6 @@
 /* eslint-disable */
 const path = require("path");
+const package = require("./package.json");
 
 if (process.argv.includes("lib")) {
   module.exports = {
@@ -11,7 +12,7 @@ if (process.argv.includes("lib")) {
         'bootstrap-vue': 'BootstrapVue'
       });
     },
-    publicPath: "./"
+    publicPath: `//cdn.jsdelivr.net/npm/@gaia-project/viewer@${package.version}/dist/package/`
   };
 } else {
   module.exports = {
