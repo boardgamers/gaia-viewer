@@ -1,7 +1,7 @@
 <template>
   <g :class='["scoringTile", {highlighted, faded}]' v-b-tooltip :title="tooltip">
     <text class="title" x="58" y="36">R{{round}}</text>
-    <text class="content" x="5" y="31" v-if="!['ts','m', 'step'].includes(event.condition)">{{content.split(" ")[0]}}</text>
+    <text class="content" x="5" y="31" v-if="!['ts','m', 'step', 'mg'].includes(event.condition)">{{content.split(" ")[0]}}</text>
     <Condition :condition=event.condition :transform="`translate(${event.condition === 'step' ? 26 : 34}, ${event.condition === 'step' ? 20 : 22}) scale(1.3)`" />
     <Operator :condition=event.condition :operator=event.operator transform="translate(28, 27) scale(1)" />
     <Resource :kind=reward.type :count=reward.count transform="translate(64.2, 12.6) scale(1.5)" />

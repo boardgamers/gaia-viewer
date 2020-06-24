@@ -86,7 +86,7 @@ export default class TechContent extends Vue {
     }
 
     if (this.event.operator === OperatorEnum.Once || this.event.operator === OperatorEnum.Trigger || this.event.operator === OperatorEnum.Pass) {
-      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
+      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.MineOnGaia, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
         return false;
       }
     }
