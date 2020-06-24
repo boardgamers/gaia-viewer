@@ -103,7 +103,7 @@ svg {
   }
 
   .additionalMine {
-    stroke-width: 0.05;
+    stroke-width: 5;
   }
 }
 
