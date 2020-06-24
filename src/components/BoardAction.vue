@@ -2,14 +2,14 @@
   <g :class='["boardAction", kind, {highlighted, faded}]' v-b-tooltip :title="tooltip">
     <SpecialAction :action="boardActions[action].income[0]" :highlighted=highlighted x=-20 y=-25 width=40 @click="onClick" />
 
-    <text v-if="kind === 'qic'">
+    <text v-if="kind === 'qic' && costNumber === 2">
       <tspan :x="i+1 < income.length ? 1 : 0" v-for="(line, i) in income" :key="i" :dy="`${i*1.15 - (income.length - 1) / 4}em`">
         {{line.replace(/ /g, '')}}
       </tspan>
     </text>
 
     <g transform=translate(15,-15)>
-      <circle r="8" stroke="black" stroke-width="1" :fill="kind === 'power' ? 'purple' : 'green'" transform=scale(0.8) v-if="costNumber>1" />
+      <circle r="8" stroke="black" stroke-width="1" :fill="kind === 'power' ? '#984FF1' : 'green'" transform=scale(0.8) v-if="costNumber>1" />
       <text x="-3" y="3.5" v-if="costNumber>1" fill="white" style="fill: white !important">
           {{costNumber}}
       </text>

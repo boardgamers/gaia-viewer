@@ -12,8 +12,7 @@
       <VictoryPoint width="15" height="15" />
     </g>
     <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(30)" outline />
-    <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' width=20 transform="translate(-9, -14)" />
-    <template v-if="kind === 'step'">
+    <template v-else-if="kind === 'step'">
       <image xlink:href='../assets/resources/dig-planet.svg' width=20 x=-10 y=-10 />
       <template v-if="count === 1 || !count">
         <image xlink:href='../assets/resources/dig-arrow.svg' width=14 x=-11 y=-4 />
@@ -23,6 +22,10 @@
         <image xlink:href='../assets/resources/dig-arrow.svg' width=14 x=-9 y=-2 />
       </template>
     </template>
+    <image v-else-if="kind === 'tech'" xlink:href='../assets/resources/tech.svg' width=22 x=-11 y=-8 />
+    <Federation v-else-if="kind === 'fed'" width=20 x=-10 y=-25 :used=true />
+    <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' width=20 transform="translate(-9, -14)" />
+
     <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
     <text x="0" y="0" v-if="['o','c','k','pw','t','vp','ship'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{count}}</text>
    </g>
@@ -36,10 +39,12 @@ import Building from './Building.vue';
 import SpaceShip from './SpaceShip.vue';
 import Qic from './Resources/Qic.vue';
 import VictoryPoint from './Resources/VictoryPoint.vue';
+import Federation from './FederationTile.vue';
 
 @Component({
   components: {
     Building,
+    Federation,
     Qic,
     SpaceShip,
     VictoryPoint

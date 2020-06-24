@@ -42,8 +42,7 @@ export default class SpecialAction extends Vue {
   }
 
   get rewards () {
-    console.log(Reward.parse(this.action), this.action);
-    return Reward.parse(this.action);
+    return new Event(this.action).rewards;
   }
 
   get _highlighted () {
@@ -57,24 +56,19 @@ export default class SpecialAction extends Vue {
 
 g {
   &.specialAction {
-    polygon {
+    & > polygon {
       stroke: black;
       stroke-width: 1;
       fill: orange;
     }
 
-    &.highlighted polygon {
+    &.highlighted > polygon {
       stroke: #2C4;
       cursor: pointer;
     }
 
     &.disabled {
-      stroke-opacity: 0.6;
-      fill-opacity: 0.3;
-
-      text {
-        fill: #000;
-      }
+      opacity: 0.5;
     }
   }
 }
