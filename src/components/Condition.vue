@@ -5,6 +5,7 @@
     <PlanetType v-else-if="condition === 'pt'"  transform=scale(1.1) filter=url(#outline-1) />
     <Sector v-else-if="condition === 's'" transform=scale(1.5) />
     <Planet v-else-if="condition === 'g'" planet="g" transform=scale(13) />
+    <Resource v-else-if="condition === 'step'" kind="step" />
   </g>
 </template>
 <script lang="ts">
@@ -14,6 +15,7 @@ import Building from './Building.vue';
 import Federation from './FederationTile.vue';
 import Planet from './Planet.vue';
 import PlanetType from './Conditions/PlanetType.vue';
+import Resource from './Resource.vue';
 import Sector from './Conditions/Sector.vue';
 
 @Component({
@@ -22,6 +24,7 @@ import Sector from './Conditions/Sector.vue';
     Federation,
     Planet,
     PlanetType,
+    Resource,
     Sector
   }
 })

@@ -1,6 +1,6 @@
 <template>
   <g class="operator">
-    <image xlink:href="../assets/operators/trigger.svg" width=15 transform=translate(-20,-24) />
+    <image xlink:href="../assets/operators/trigger.svg" v-if="condition !== 'step'" width=15 transform=translate(-20,-24) />
   </g>
 </template>
 <script lang="ts">
