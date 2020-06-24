@@ -19,8 +19,8 @@
       <line x1="-15" x2="15" y1=-10 y2=-10 stroke ="#aaa" />
       <line x1="-15" x2="15" y1=10 y2=10 stroke ="#aaa" />
       <image xlink:href="../assets/operators/trigger.svg" width=15 :transform="`rotate(180), translate(6, -8), scale(0.7)`" />
-      <text y=-1 style="font-size: 9px">3</text>
-      <text y=8.5 style="font-size: 9px">2</text>
+      <!-- <text y=-1 style="font-size: 9px">3</text>
+      <text y=8.5 style="font-size: 9px">2</text>-->
     </g>
   </g>
 </template>
