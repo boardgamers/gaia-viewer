@@ -1,9 +1,6 @@
 <template>
   <g>
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
-    <template v-if="event.operator==='>>'">
-      <Operator :operator=event.operator :condition=event.condition transform="translate(2,10) scale(1.2)" />
-    </template>
     <SpecialAction v-if="isAction" :action="['>' + content.split('=>')[1].trim()]" y=-20 width=40 height=40 x=-20 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(19.5, -19.5), scale(1.35)" />
     <Condition :condition=condition :transform="`translate(${event.operator==='>>' && condition !== 'a' ?8:0}, ${event.operator==='>>' ? 5 + (condition === 'a' ? 3 : 0) : (event.operator === '|' ? 7 : 0)}) scale(1.5)`" />
@@ -19,6 +16,9 @@
       <Resource kind="t" transform="translate(-6.66, 18) scale(0.8)" />
       <Resource kind="t" transform="translate(6.66, 18) scale(0.8)" />
       <Resource kind="t" transform="translate(20, 18) scale(0.8)" />
+    </template>
+    <template v-else-if="event.operator==='>>'">
+      <Operator :operator=event.operator :condition=event.condition transform="translate(2,10) scale(1.2)" />
     </template>
     <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle; stroke-width: 2px; font-weight: bold;" x="-14" v-if="event.operator === '+'">+</text>
   </g>

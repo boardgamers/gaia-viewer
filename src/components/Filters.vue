@@ -70,9 +70,9 @@ export default class Filters extends Vue {
     const planets = Object.values(Planet).filter(pl => pl !== Planet.Empty);
     return planets.map(planet => {
       const color = planetColor(planet);
-      const lightness = 0.5;
+      const darkness = 1;
 
-      return [planet, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, lightness];
+      return [planet, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, darkness];
     });
   }
 }

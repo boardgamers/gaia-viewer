@@ -6,9 +6,9 @@
     <Sector v-else-if="condition === 's'" transform=scale(1.5) />
     <Planet v-else-if="condition === 'g'" planet="g" transform=scale(13) />
     <Resource v-else-if="condition === 'step'" kind="step" />
-    <g v-else-if="condition === 'mg'" transform="translate(-2,2)">
-      <image xlink:href="../assets/conditions/planet-flat.svg" width=25 x=-12 y=-4 filter="url(#color-planet-g)" />
-      <Building building="m" outline transform="translate(0, -4) scale(22)" />
+    <g v-else-if="condition === 'mg'" transform="translate(-2,0)">
+      <image xlink:href="../assets/conditions/planet-flat.svg" width=30 x=-12 y=-11.5 filter="url(#color-planet-g)" transform="scale(-1,-1)" />
+      <Building building="m" outline transform="translate(0, -5) scale(22)" />
     </g>
     <g v-else-if="condition === 'PA'">
       <Building building="PI" outline transform="translate(-8, 0) scale(18)" />
