@@ -3,6 +3,7 @@
     <g :class='["specialAction", {highlighted: _highlighted, disabled}]'>
       <polygon points="-10,4 -4,10 4,10 10,4 10,-4 4,-10 -4,-10 -10,-4" transform="scale(2.4)" @click="onClick" />
       <Resource v-for="(reward, i) in rewards" :key=i :count=reward.count :kind=reward.type :transform="`translate(${rewards.length > 1 ? (i - 0.5) * 20  : 0}, ${reward.type === 'pw' ? 4 : 0}), scale(1.5)`" />
+      <TechContent :context=action[0] />
     </g>
   </svg>
 </template>
@@ -13,10 +14,12 @@ import { Component, Prop } from 'vue-property-decorator';
 import { tiles, Event, Reward } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
+import TechContent from './TechContent.vue';
 
 @Component({
   components: {
-    Resource
+    Resource,
+    TechContent
   }
 })
 export default class SpecialAction extends Vue {
@@ -27,7 +30,7 @@ export default class SpecialAction extends Vue {
   highlighted: boolean;
 
   @Prop()
-  action: string;
+  action: string[];
 
   onClick () {
     if (!this.highlighted) {
@@ -37,12 +40,8 @@ export default class SpecialAction extends Vue {
     this.$store.dispatch("gaiaViewer/actionClick", this.action);
   }
 
-  get income () {
-    return this.action.includes(',') ? this.action.split(',') : this.action.split('-');
-  }
-
   get rewards () {
-    return new Event(this.action).rewards;
+    return new Event(this.action[0]).rewards;
   }
 
   get _highlighted () {
