@@ -26,11 +26,11 @@ export default class SpecialAction extends Vue {
   action: string[];
 
   onClick () {
-    if (!this.highlighted) {
+    if (!this.isHighlighted) {
       this.$emit("click");
       return;
     }
-    this.$store.dispatch("gaiaViewer/actionClick", this.action);
+    this.$store.dispatch("gaiaViewer/actionClick", this.action.join(","));
   }
 
   get rewards () {
@@ -38,7 +38,7 @@ export default class SpecialAction extends Vue {
   }
 
   get isHighlighted () {
-    return this.highlighted || this.$store.state.gaiaViewer.context.highlighted.actions.has(this.action);
+    return this.highlighted || this.$store.state.gaiaViewer.context.highlighted.actions.has(this.action.join(","));
   }
 }
 

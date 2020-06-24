@@ -1,9 +1,10 @@
 <template>
   <svg :class='["booster", {highlighted, disabled}]' v-b-tooltip :title="tooltip" @click="onClick" width="60" height="120" viewBox="-32 -62 64 124">
-    <rect x="-30" y="-60" width="60" height="120" rx="3" ry="3" stroke="black" stroke-width=2 fill="#777" />
+    <rect x="-30" y="-60" width="60" height="120" rx="3" ry="3" stroke="black" stroke-width=0 fill="#777" />
     <line x1=-29 x2=29 y1=0 y2=0 stroke=#aaa stroke-width=2 />
     <TechContent :content=event1 transform="translate(0, -30)" />
     <TechContent :content=event2 transform="translate(0, 30)" />
+    <rect x="-30" y="-60" width="60" height="120" rx="3" ry="3" stroke="black" stroke-width=2 fill="none" />
   </svg>
 </template>
 
@@ -73,7 +74,7 @@ svg {
       pointer-events: none;
     }
 
-    &.highlighted rect {
+    &.highlighted > rect {
       stroke: #2C4;
       cursor: pointer;
     }
