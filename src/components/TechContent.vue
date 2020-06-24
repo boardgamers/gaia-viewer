@@ -6,7 +6,7 @@
     </template>
     <SpecialAction v-if="isAction" :action="['>' + content.split('=>')[1].trim()]" y=-20 width=40 height=40 x=-20 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(19.5, -19.5), scale(1.35)" />
-    <Condition :condition=condition :transform="`translate(${event.operator==='>>'?8:0}, ${event.operator==='>>' ? 5 : (event.operator === '|' ? 7 : 0)}) scale(1.5)`" />
+    <Condition :condition=condition :transform="`translate(${event.operator==='>>' && condition !== 'a' ?8:0}, ${event.operator==='>>' ? 5 + (condition === 'a' ? 3 : 0) : (event.operator === '|' ? 7 : 0)}) scale(1.5)`" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
     <template v-if="event.operator === '|'">
@@ -87,7 +87,7 @@ export default class TechContent extends Vue {
 
     if (this.event.operator === OperatorEnum.Once || this.event.operator === OperatorEnum.Trigger || this.event.operator === OperatorEnum.Pass) {
       // console.log(this.event, this.event.condition);
-      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.MineOnGaia, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
+      if ([ConditionEnum.None, ConditionEnum.Federation, ConditionEnum.PlanetaryInstituteOrAcademy, ConditionEnum.AdvanceResearch, ConditionEnum.MineOnGaia, ConditionEnum.PlanetType, ConditionEnum.Sector, ConditionEnum.Gaia, ...Object.values(BuildingEnum)].includes(this.event.condition as any)) {
         return false;
       }
     }

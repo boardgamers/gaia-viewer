@@ -10,6 +10,10 @@
       <image xlink:href="../assets/conditions/planet-flat.svg" width=25 x=-12 y=-4 filter="url(#color-planet-g)" />
       <Building building="m" outline transform="translate(0, -4) scale(22)" />
     </g>
+    <g v-else-if="condition === 'PA'">
+      <Building building="PI" outline transform="translate(-8, 0) scale(18)" />
+      <Building building="ac1" outline transform="translate(8, 0) scale(18)" />
+    </g>
     <g v-else-if="condition === 'a'">
       <line x1="-15" x2="15" stroke ="#aaa" />
       <line x1="-15" x2="15" y1=-10 y2=-10 stroke ="#aaa" />
