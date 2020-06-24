@@ -1,15 +1,16 @@
 <template>
   <g :class='["boardAction", kind, {highlighted, faded}]' v-b-tooltip :title="tooltip">
-    <polygon points="-1,0.5 -0.5,1 0.5,1 1,0.5 1,-0.5 0.5,-1 -0.5,-1 -1,-0.5" :transform="`scale(${scale})`" @click="onClick" />
-    <text :transform="`scale(${scale/17})`">
+    <SpecialAction :action="boardActions[action].income[0]" x=-20 y=-25 width=40 @click="onClick" />
+
+    <text>
       <tspan :x="i+1 < income.length ? 1 : 0" v-for="(line, i) in income" :key="i" :dy="`${i*1.15 - (income.length - 1) / 4}em`">
         {{line.replace(/ /g, '')}}
       </tspan>
     </text>
-    <Resource v-for="(reward, i) in rewards" :key=i :kind=reward.type :count=reward.count :transform="`translate(0, ${(i - (rewards.length - 1)/2) * 14}) scale(${scale/(rewards.length === 1 ? 13 : 17)})`" />
+
     <g transform=translate(15,-15)>
-      <circle r="8" stroke="black" stroke-width="1" fill="white" transform=scale(0.8) v-if="costNumber>1" />
-      <text x="-3" y="3.5" v-if="costNumber>1" fill="black">
+      <circle r="8" stroke="black" stroke-width="1" :fill="kind === 'power' ? 'purple' : 'green'" transform=scale(0.8) v-if="costNumber>1" />
+      <text x="-3" y="3.5" v-if="costNumber>1" fill="white" style="fill: white !important">
           {{costNumber}}
       </text>
     </g>
@@ -22,16 +23,15 @@ import { Component, Prop } from 'vue-property-decorator';
 import { tiles, Event, BoardAction as BoardActionEnum, boardActions, Reward } from '@gaia-project/engine';
 import { eventDesc } from '../data/event';
 import Resource from './Resource.vue';
+import SpecialAction from './SpecialAction.vue';
 
 @Component<BoardAction>({
   components: {
-    Resource
+    Resource,
+    SpecialAction
   }
 })
 export default class BoardAction extends Vue {
-  @Prop()
-  scale: number;
-
   @Prop()
   action: BoardActionEnum;
 
@@ -80,6 +80,8 @@ export default class BoardAction extends Vue {
   get costNumber () {
     return new Reward(this.cost).count;
   }
+
+  boardActions=boardActions;
 }
 
 </script>

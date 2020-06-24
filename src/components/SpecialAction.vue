@@ -28,6 +28,7 @@ export default class SpecialAction extends Vue {
 
   onClick () {
     if (!this.highlighted) {
+      this.$emit("click");
       return;
     }
     this.$store.dispatch("gaiaViewer/actionClick", this.action);

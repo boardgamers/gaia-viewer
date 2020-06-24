@@ -8,7 +8,7 @@
       <TechTile pos="free3" x="230" y="380" />
       <TechTile pos="free4" v-if="expansions" x="310" y="380" />
     </g>
-    <BoardAction :scale="17" :transform="`translate(-20, ${53 + 38*i})`" v-for="(action, i) in actions" :key="action" :action="action" />
+    <BoardAction :scale="17" :transform="`translate(-25, ${23 + 44*i})`" v-for="(action, i) in actions" :key="action" :action="action" />
   </svg>
 </template>
 
