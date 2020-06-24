@@ -4,7 +4,7 @@
     <Federation v-else-if="condition === 'fed'" width=25 x=-12.5 y=-26 :used=true />
     <PlanetType v-else-if="condition === 'pt'"  transform=scale(1.1) filter=url(#outline-1) />
     <Sector v-else-if="condition === 's'" transform=scale(1.5) />
-    <g v-else-if="condition === 'g'" filter=url(#outline-1) >
+    <g v-else-if="condition === 'g'" filter=url(#outline-1) transform=scale(0.85) >
       <image xlink:href="../assets/conditions/planet.svg" width=25 x=-12 y=-11.5 filter="url(#color-planet-g)" transform="scale(-1,1)" />
     </g>
     <Resource v-else-if="condition === 'step'" kind="step" />
@@ -13,8 +13,8 @@
       <Building building="m" outline transform="translate(0, -5) scale(22)" />
     </g>
     <g v-else-if="condition === 'PA'">
-      <Building building="PI" outline transform="translate(-8, 0) scale(18)" />
-      <Building building="ac1" outline transform="translate(8, 0) scale(18)" />
+      <Building building="ac1" outline transform="translate(-8, 0) scale(18)" />
+      <Building building="PI" outline transform="translate(8, 1) scale(18)" />
     </g>
     <g v-else-if="condition === 'a'">
       <line x1="-15" x2="15" stroke ="#aaa" />
