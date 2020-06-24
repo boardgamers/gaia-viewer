@@ -97,10 +97,6 @@ g.resource {
     fill: #984FF1;
   }
 
-  .building {
-    stroke-width: 0.04px;
-  }
-
   .ore, .credit, .building.r, .ship {
     & + text {
       fill: black
