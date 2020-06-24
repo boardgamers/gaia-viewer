@@ -12,7 +12,7 @@
       <VictoryPoint width="15" height="15" />
     </g>
     <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(30)" outline />
-    <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' width=20 transform="translate(-9, -13)" />
+    <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' width=20 transform="translate(-9, -14)" />
     <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
     <text x="0" y="0" v-if="['o','c','k','pw','t','vp','ship'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{count}}</text>
    </g>
@@ -55,7 +55,7 @@ g.resource {
 
   rect, .knowledge {
     stroke: #111;
-    stroke-width: 1px;
+    stroke-width: 1.2px;
   }
 
   .qic {
