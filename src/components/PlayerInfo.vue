@@ -5,7 +5,7 @@
       <svg viewBox="-0.2 -0.5 38.5 21.4" class="player-board" :style="`background-color: ${factionColor}`">
         <rect x=-1 y=-1 width=50 height=50 fill="#ffffff44"></rect>
         <PlayerBoardInfo transform="translate(0.5, 0.5)" :player="player" :faction="player.faction" :data="playerData" />
-        <g transform="translate(5, 0)">
+        <g transform="translate(4, 0)">
           <BuildingGroup :transform="player.faction !== 'bescods' ? 'translate(2.2, 10)' : 'translate(12, 10)'" :nBuildings="1" building="PI" :faction="player.faction" :placed="playerData.buildings.PI" :resource="['pw','t']" />
           <BuildingGroup :transform="player.faction === 'bescods' ? 'translate(2.2, 10)' : 'translate(12, 10)'" :nBuildings="2" building="ac1" :faction="player.faction" :placed="0" :ac1="playerData.buildings.ac1" :ac2="playerData.buildings.ac2" :resource="['q']" />
           <BuildingGroup transform="translate(0, 13)" :nBuildings="4" building="ts" :faction="player.faction" :placed="playerData.buildings.ts" :resource="['c']" />
@@ -21,8 +21,8 @@
           <line x1=10.4 x2=11 y1=13.0 y2=13.0 stroke=black stroke-width="0.06" />
         </g>
 
-        <Booster v-if="playerData.tiles.booster" x=0.3 y=9 width=4.1 height=8.2 :booster="playerData.tiles.booster" :disabled="passed"/>
-        <PowerBowls transform="translate(30.5,14.5)" :faction="player.faction" :data="playerData" :player="player" />
+        <Booster v-if="playerData.tiles.booster" x=0 y=10 width=3.5 height=7 :booster="playerData.tiles.booster" :disabled="passed"/>
+        <PowerBowls transform="translate(30,14.5)" :faction="player.faction" :data="playerData" :player="player" />
 
         <g transform="translate(29.3, 5)">
           <g v-for="i in [0, 1, 2, 3]" :key="i" :transform="`translate(${(i-2)*3.8}, 0)`">
