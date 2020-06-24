@@ -5,9 +5,11 @@ import { EventEmitter } from 'events';
 
 import { makeStore } from './store';
 import Game from './components/Game.vue';
+import TechContent from './components/TechContent.vue';
 import type { VueConstructor } from "vue/types/umd";
 
 Vue.use(BootstrapVue);
+Vue.component("TechContent", TechContent);
 
 function launch (selector: string, component: VueConstructor<Vue> = Game) {
   const store = makeStore();
