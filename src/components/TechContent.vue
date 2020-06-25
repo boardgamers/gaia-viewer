@@ -10,8 +10,8 @@
       <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-18,-18) scale(1.3)" stroke=black stroke-width=1 />
     </template>
     <template v-else-if="event.operator === 'PA->4pw'">
-      <Building building="PI" transform="translate(-14, -8) scale(2.7) " outline />
-      <Building building="ac1" transform="translate(14, -8) scale(2.7)" outline />
+      <Building building="PI" transform="translate(-14, -8) scale(2.7) "  />
+      <Building building="ac1" transform="translate(14, -8) scale(2.7)"  />
       <Resource kind="t" transform="translate(-20, 18) scale(0.8)" />
       <Resource kind="t" transform="translate(-6.66, 18) scale(0.8)" />
       <Resource kind="t" transform="translate(6.66, 18) scale(0.8)" />
