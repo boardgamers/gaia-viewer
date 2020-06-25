@@ -77,6 +77,7 @@ svg {
     &.highlighted > rect {
       stroke: #2C4;
       cursor: pointer;
+      stroke-width: 2px;
     }
 
     &.disabled {

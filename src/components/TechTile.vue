@@ -105,6 +105,7 @@ svg {
     &.highlighted .tech-border {
       stroke: #2C4;
       cursor: pointer;
+      stroke-width: 2px;
     }
 
     &.covered {
