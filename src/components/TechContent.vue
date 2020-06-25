@@ -6,9 +6,10 @@
     <Condition :condition=condition :transform="`translate(${event.operator==='>>' && condition !== 'a' ?8:0}, ${event.operator==='>>' ? 5 + (condition === 'a' ? 3 : 0) : (event.operator === '|' ? 7 : 0)}) scale(1.5)`" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
-    <template v-if="event.operator === '|'">
+    <g v-if="event.operator === '|'">
       <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-18,-18) scale(1.3)" stroke=black stroke-width=1 />
-    </template>
+      <text x=-18 y=-18 style="text-anchor: middle; dominant-baseline: central; font-size: 8px; fill: black !important; font-weight: bold">END</text>
+    </g>
     <template v-else-if="event.operator === 'PA->4pw'">
       <Building building="PI" transform="translate(-14, -8) scale(2.7) "  />
       <Building building="ac1" transform="translate(14, -8) scale(2.7)"  />
