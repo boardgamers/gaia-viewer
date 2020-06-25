@@ -3,7 +3,7 @@
     <filter id="outline">
       <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5"></feMorphology>
 
-      <feFlood flood-color="black" flood-opacity="1" result="PINK"></feFlood>
+      <feFlood flood-color="white" flood-opacity="1" result="PINK"></feFlood>
       <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
 
       <feMerge>
