@@ -78,7 +78,7 @@ g.resource {
 
   rect, .knowledge {
     stroke: #111;
-    stroke-width: 0.6px;
+    stroke-width: 0.9px;
   }
 
   .qic {
