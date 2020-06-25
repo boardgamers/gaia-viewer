@@ -60,9 +60,9 @@ export default class Filters extends Vue {
     const factions = Object.values(Faction);
     return factions.map(faction => {
       const color = factionColor(faction);
-      const lightness = 0.5;
+      const darkness = 0.5;
 
-      return [faction, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, lightness];
+      return [faction, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, darkness];
     });
   }
 
