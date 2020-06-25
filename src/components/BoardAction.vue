@@ -9,6 +9,7 @@
     </text> -->
 
     <g transform=translate(-15,-15)>
+      <image v-if="kind === 'power'" xlink:href='../assets/resources/power-charge.svg' width=20 transform=" scale(-1,1) translate(-9, -12)" />
       <rect x=-8 y=-8 width=16 height=16 :rx="kind === 'power' ? 8 : 0" :ry="kind === 'power' ? 8 : 0" stroke="black" stroke-width="1" :fill="kind === 'power' ? '#984FF1' : 'green'" transform=scale(0.8) v-if="costNumber>1" />
       <text x="-3" y="3.5" v-if="costNumber>1" fill="white" style="fill: white !important">
           {{costNumber}}
