@@ -50,7 +50,7 @@ g {
   &.specialAction {
     & > polygon {
       stroke: black;
-      stroke-width: 1;
+      stroke-width: 0.5;
       fill: orange;
     }
 

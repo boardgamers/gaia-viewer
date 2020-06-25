@@ -7,7 +7,7 @@
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
     <template v-if="event.operator === '|'">
-      <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-17,-17) scale(1.3)" stroke=black stroke-width=1.5 />
+      <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-18,-18) scale(1.3)" stroke=black stroke-width=1 />
     </template>
     <template v-else-if="event.operator === 'PA->4pw'">
       <Building building="PI" transform="translate(-14, -8) scale(2.7) " outline />
@@ -20,7 +20,7 @@
     <template v-else-if="event.operator==='>>'">
       <Operator :operator=event.operator :condition=event.condition transform="translate(2,10) scale(1.2)" />
     </template>
-    <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle; stroke-width: 2px; font-weight: bold;" x="-14" v-if="event.operator === '+'">+</text>
+    <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle; stroke-width: 1px; font-weight: bold;" x="-14" v-if="event.operator === '+'">+</text>
   </g>
 </template>
 
