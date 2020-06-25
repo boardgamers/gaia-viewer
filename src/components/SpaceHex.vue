@@ -44,7 +44,7 @@ export default class SpaceHex extends Vue {
   }
 
   get flat () {
-    return this.$store.state.gaiaViewer.preferences.flatBuildings || 1;
+    return this.$store.state.gaiaViewer.preferences.flatBuildings;
   }
 
   get map (): ISpaceMap {
