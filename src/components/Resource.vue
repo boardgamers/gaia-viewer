@@ -11,7 +11,7 @@
     <g v-else-if="kind=='vp'" transform="translate(-7.5,-7.5)" class="vp">
       <VictoryPoint width="15" height="15" />
     </g>
-    <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(30)" outline />
+    <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(3)" outline />
     <template v-else-if="kind === 'step'">
       <image xlink:href='../assets/resources/dig-planet.svg' width=20 x=-10 y=-10 />
       <template v-if="count === 1 || !count">

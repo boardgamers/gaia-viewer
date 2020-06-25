@@ -98,7 +98,7 @@ svg {
     stroke: #111;
 
     & > * {
-      transform: scale(0.01);
+      transform: scale(0.1);
     }
   }
 
