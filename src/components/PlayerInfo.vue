@@ -28,13 +28,13 @@
           <g v-for="i in [0, 1, 2, 3]" :key="i" :transform="`translate(${(i-2)*3.8}, 0)`">
             <g v-for="(planet, index) in planetsWithSteps(i)" :key="planet" :transform="`translate(0, ${(i > 0 ? (index > 0 ? 1 : -1) : 0)*1.4})`">
               <circle :r="1" style="stroke-width: 0.06px !important"  :class="['player-token', 'planet-fill', planet]" />
-              <text :style="`font-size: 1.2px; text-anchor: middle; dominant-baseline: mathematical; fill: ${planetFill(planet)}`">{{player.ownedPlanetsCount[planet]}}</text>
+              <text :style="`font-size: 1.2px; text-anchor: middle; dominant-baseline: central; fill: ${planetFill(planet)}`">{{player.ownedPlanetsCount[planet]}}</text>
             </g>
             <line x1=1.9 x2=1.9 y1=-2.3 y2=2.3 stroke-width=0.06 stroke=black />
           </g>
           <g :transform="`translate(7.6, 0)`">
             <circle :r="1" style="stroke-width: 0.06px !important"  :class="['player-token', 'planet-fill', 'g']" />
-            <text style="font-size: 1.2px; text-anchor: middle; dominant-baseline: mathematical; fill: white">{{player.ownedPlanetsCount['g']}}</text>
+            <text style="font-size: 1.2px; text-anchor: middle; dominant-baseline: central; fill: white">{{player.ownedPlanetsCount['g']}}</text>
           </g>
         </g>
 
