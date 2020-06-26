@@ -36,10 +36,11 @@
     </filter>
     <template v-for="[faction, r, g, b, x] in factionData">
       <filter :id="`color-${faction}`" :key=faction>
-        <feColorMatrix type="matrix" :values="`${r/(3*x)} ${r/(3*x)} ${r/(3*x)} 0 0
-                                                        ${g/(3*x)} ${g/(3*x)} ${g/(3*x)} 0 0
-                                                        ${b/(3*x)} ${b/(3*x)} ${b/(3*x)} 0 0
-                                                          0    0   0 1 0`"/>
+        <feColorMatrix type="matrix" result=A :values="`${r/x} 0 0 0 0
+                                                ${g/x} 0 0 0 0
+                                                ${b/x} 0 0 0 0
+                                                  0    0   0 1 0`"/>
+        <feColorMatrix in="A" type="saturate" values="2"/>
       </filter>
     </template>
     <template v-for="[planet, r, g, b, x] in planetData">

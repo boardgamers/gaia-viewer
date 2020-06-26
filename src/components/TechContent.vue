@@ -3,14 +3,14 @@
     <text :class="['content', {smaller: content.length >= 10}]" x="-25" y="0" v-if="showText">{{content}}</text>
     <SpecialAction v-if="isAction" :action="['>' + content.split('=>')[1].trim()]" y=-20 width=40 height=40 x=-20 />
     <Resource v-if="cornerReward" :count=cornerReward.count :kind=cornerReward.type transform="translate(19.5, -19.5), scale(1.35)" />
-    <Condition :condition=condition :transform="`translate(${event.operator==='>>' && condition !== 'a' ?8:0}, ${event.operator==='>>' ? 5 + (condition === 'a' ? 3 : 0) : (event.operator === '|' ? 4 : 0)}) scale(1.5)`" />
+    <g v-if="event.operator === '|'">
+      <polygon points="-30,-28 -17,0 -30,28" fill="#F8031D" stroke=black stroke-width=1 stroke-miterlimit=1 />
+      <text x=-26.5 y=0 style="text-anchor: middle; dominant-baseline: central; font-size: 8px; fill: white !important; letter-spacing: -3px; writing-mode: vertical-rl; text-orientation: upright; font-stretch: condensed">PASS</text>
+    </g>
+    <Condition :condition=condition :transform="`translate(${event.operator==='>>' && condition !== 'a' ? 8 : 0}, ${event.operator==='>>' ? (condition === 'a' ? 8 : 0) : 0}) scale(1.5)`" />
     <Resource v-for="(res, i) in centerRewards" :count=res.count :kind=res.type :key=i :transform="`translate(${centerRewards.length > 1 ? (i - 0.5) * 26 : 0 }, 0) scale(${centerRewards.length === 1 ? 2 : 1.5})`" />
     <Resource v-for="(res, i) in rightRewards" :count=res.count :kind=res.type :key="'right-'+i" :transform="`translate(13, ${rightRewards.length > 1 ? (i - 0.5) * 28 : 0 }) scale(1.5)`" />
-    <g v-if="event.operator === '|'">
-      <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3" fill="#F8031D" transform="translate(-18,-18) scale(1.3)" stroke=black stroke-width=1 />
-      <text x=-18 y=-18 style="text-anchor: middle; dominant-baseline: central; font-size: 8px; fill: black !important; font-weight: bold">END</text>
-    </g>
-    <template v-else-if="event.operator === 'PA->4pw'">
+    <template v-if="event.operator === 'PA->4pw'">
       <Building building="PI" transform="translate(-14, -8) scale(2.7) "  />
       <Building building="ac1" transform="translate(14, -8) scale(2.7)"  />
       <Resource kind="t" transform="translate(-20, 18) scale(0.8)" />
@@ -19,7 +19,7 @@
       <Resource kind="t" transform="translate(20, 18) scale(0.8)" />
     </template>
     <template v-else-if="event.operator==='>>'">
-      <Operator :operator=event.operator :condition=event.condition transform="translate(2,10) scale(1.2)" />
+      <Operator :operator=event.operator :condition=event.condition transform="translate(2,5) scale(1.2)" />
     </template>
     <text style="font-size: 40px; stroke: black; fill: white; dominant-baseline: central; text-anchor: middle; stroke-width: 1px; font-weight: bold;" x="-14" v-if="event.operator === '+'">+</text>
   </g>
