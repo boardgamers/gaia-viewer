@@ -61,8 +61,8 @@ export default class Filters extends Vue {
   get factionData () {
     const factions = Object.values(Faction);
     return factions.map(faction => {
-      const color = factionColor(faction);
-      const darkness = 0.5;
+      const color = (faction === Faction.Ambas || faction === Faction.Taklons) ? "#8A482C" : factionColor(faction);
+      const darkness = (faction === Faction.Ambas || faction === Faction.Taklons) ? 1 : 0.5;
       const saturation = faction === (Faction.Ivits || faction === Faction.HadschHallas) ? 1.2 : 2;
 
       return [faction, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, darkness, saturation];

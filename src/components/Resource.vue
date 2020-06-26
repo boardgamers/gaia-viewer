@@ -12,15 +12,16 @@
       <VictoryPoint width="15" height="15" />
     </g>
     <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(3)" />
-    <g v-else-if="kind=='space-station'" transform="scale(-1,1)">
-      <Building faction="firaks" building="lab" transform="translate(-7.5, 0) scale(1.5)"/>
-      <Building faction="firaks" building="ts" transform="translate(7.5, 0) scale(1.5)"/>
+    <g v-else-if="kind=='swap-PI'" transform="scale(-1,1)">
+      <Building faction="ambas" building="m" transform="translate(-7.5, 0) scale(1.5)"/>
+      <Building faction="ambas" building="PI" transform="translate(7.5, 0) scale(1.5)"/>
       <image xlink:href="../assets/resources/arrow-charge.svg" width=15 x=-7.5 y=-14 />
+      <image xlink:href="../assets/resources/arrow-charge.svg" width=15 x=-7.5 y=-14 transform="scale(-1,-1)" />
     </g>
-    <g v-else-if="kind=='down-lab'">
+    <g v-else-if="kind=='down-lab'" transform="scale(-1,1)">
       <Building faction="firaks" building="lab" transform="translate(-7.5, 0) scale(1.5)"/>
-      <Building faction="firaks" building="ts" transform="translate(7.5, 0) scale(1.5)"/>
-      <image xlink:href="../assets/resources/arrow-charge.svg" width=15 x=-7.5 y=-12.5 transform="scale(1,1)" />
+      <Building faction="firaks" building="ts" transform="translate(7.5, 0) scale(-1.5,1.5)"/>
+      <image xlink:href="../assets/resources/arrow-charge.svg" width=15 x=-7.5 y=-14 />
     </g>
     <Building v-else-if="kind=='space-station'" building="sp" transform="translate(0.5, 0) scale(2.5)" faction="ivits" />
     <template v-else-if="kind === 'step'">
