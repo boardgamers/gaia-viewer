@@ -1,7 +1,7 @@
 <template>
   <svg :viewBox='`-40 0 ${viewWidth} 440`' :height="height" :width="width" class="research-board">
     <ResearchTrack v-for="(field, index) in [...fields].reverse()" :field=field :x="(fields.length - 1 - index)*60" :key="field" />
-    <text y="206" x="130" style="font-size: 14px">Charge 3 power</text>
+    <text y="200" x="180" style="font-size: 14px; text-anchor: middle">Charge 3 power</text>
     <g v-if="$store.state.gaiaViewer.data.tiles && $store.state.gaiaViewer.data.tiles.techs['gaia']">
       <TechTile pos="free1" x="70" y="380" />
       <TechTile pos="free2" x="150" y="380" />
@@ -19,6 +19,7 @@ import { ResearchField, BoardAction as BoardActionEnum } from '@gaia-project/eng
 import ResearchTrack from './ResearchTrack.vue';
 import TechTile from './TechTile.vue';
 import BoardAction from "./BoardAction.vue";
+import Resource from "./Resource.vue";
 
 @Component({
   computed: {
@@ -41,7 +42,8 @@ import BoardAction from "./BoardAction.vue";
   components: {
     ResearchTrack,
     TechTile,
-    BoardAction
+    BoardAction,
+    Resource
   }
 })
 export default class ResearchBoard extends Vue {

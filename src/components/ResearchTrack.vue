@@ -1,14 +1,14 @@
 <template>
   <g :transform="`translate(${x}, 0)`">
-    <ResearchTile y="290" :level="0" :field="field" />
-    <ResearchTile y="250" :level="1" :field="field" />
-    <ResearchTile y="210" :level="2" :field="field" />
-    <ResearchTile y="153" :level="3" :field="field" />
-    <ResearchTile y="113" :level="4" :field="field" />
+    <ResearchTile y="282" :level="0" :field="field" />
+    <ResearchTile y="243" :level="1" :field="field" />
+    <ResearchTile y="204" :level="2" :field="field" />
+    <ResearchTile y="147" :level="3" :field="field" />
+    <ResearchTile y="108" :level="4" :field="field" />
     <ResearchTile y="0" :level="5" :field="field" />
     <g v-if="$store.state.gaiaViewer.data.tiles && $store.state.gaiaViewer.data.tiles.techs['gaia']">
-      <TechTile :pos="'adv-'+field" y="51.5" x="1" />
-      <TechTile :pos="field" y="331" x="1" />
+      <TechTile :pos="'adv-'+field" y="49" x="0" />
+      <TechTile :pos="field" y="321" x="0" />
     </g>
   </g>
 </template>

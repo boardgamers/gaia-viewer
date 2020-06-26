@@ -1,6 +1,6 @@
 <template>
   <g :transform="`translate(0, ${y})`" v-b-tooltip.html.left :title="tooltip" :class="field">
-    <rect x="2" y="2" :class='["researchTile", field, {highlighted}]' width=56 :height="height" rx="5" ry="5" @click="onClick" />
+    <rect x="2" y="2" :class='["researchTile", field, {highlighted}]' width=56 :height="height" rx="5" ry=2 @click="onClick" />
     <g style="pointer-events: none">
       <Resource v-for="(resource,i) in resources" :key="'field-' + i" :transform="`translate(${2 + 56/2 + resourceX(i)}, ${height/3*2 + 3 + resourceOffset})`" :kind="resource.type" :count="resource.count" />
       <Token v-for="player in players" :faction="player.faction" :transform="`translate(${tokenX(player.player)}, ${tokenY(player.player)})`" :key="player.player" :scale="5.5" />
