@@ -12,6 +12,7 @@
       <VictoryPoint width="15" height="15" />
     </g>
     <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(3)" />
+    <Building v-else-if="kind=='space-station'" building="sp" transform="translate(0.5, 0) scale(2.5)" faction="ivits" />
     <template v-else-if="kind === 'step'">
       <image xlink:href='../assets/resources/dig-planet.svg' width=20 x=-10 y=-10 />
       <template v-if="count === 1 || !count">

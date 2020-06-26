@@ -1,7 +1,7 @@
 <template>
   <defs>
     <filter id="shadow-5">
-      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="5"></feMorphology>
+      <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="2"></feMorphology>
 
       <feFlood flood-color="black" flood-opacity="1" result="PINK"></feFlood>
       <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>
@@ -34,13 +34,13 @@
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
-    <template v-for="[faction, r, g, b, x] in factionData">
+    <template v-for="[faction, r, g, b, x, s] in factionData">
       <filter :id="`color-${faction}`" :key=faction>
         <feColorMatrix type="matrix" result=A :values="`${r/x} 0 0 0 0
                                                 ${g/x} 0 0 0 0
                                                 ${b/x} 0 0 0 0
                                                   0    0   0 1 0`"/>
-        <feColorMatrix in="A" type="saturate" values="2"/>
+        <feColorMatrix in="A" type="saturate" :values="s"/>
       </filter>
     </template>
     <template v-for="[planet, r, g, b, x] in planetData">
@@ -63,8 +63,9 @@ export default class Filters extends Vue {
     return factions.map(faction => {
       const color = factionColor(faction);
       const darkness = 0.5;
+      const saturation = faction === (Faction.Ivits || faction === Faction.HadschHallas) ? 1.2 : 2;
 
-      return [faction, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, darkness];
+      return [faction, parseInt(color.slice(1, 3), 16) / 255, parseInt(color.slice(3, 5), 16) / 255, parseInt(color.slice(5, 7), 16) / 255, darkness, saturation];
     });
   }
 
