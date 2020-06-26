@@ -23,7 +23,7 @@
       </template>
     </template>
     <image v-else-if="kind === 'tech'" xlink:href='../assets/resources/tech.svg' width=22 x=-11 y=-8 />
-    <Federation v-else-if="kind === 'fed'" width=23 x=-11.5 y=-26 :used=true />
+    <Federation v-else-if="kind === 'fed'" width=22 x=-11 y=-26.5 :used=true />
     <template v-else-if="kind === 'range'">
       <image xlink:href="../assets/resources/flat-hex.svg" width=15 y=-9 x=-2 />
       <image xlink:href="../assets/resources/flat-hex.svg" width=20 y=3 x=-10 />

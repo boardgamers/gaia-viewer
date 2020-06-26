@@ -1,7 +1,7 @@
 <template>
   <g class="condition">
     <Building v-if="isBuilding" :building="condition"  transform="translate(0, 0) scale(2.2)" />
-    <Federation v-else-if="condition === 'fed'" width=25 x=-12.5 y=-26 :used=true />
+    <Federation v-else-if="condition === 'fed'" width=24 x=-12 y=-26.5 :used=true />
     <PlanetType v-else-if="condition === 'pt'"  transform=scale(1.1) />
     <Sector v-else-if="condition === 's'" transform=scale(1.5) />
     <g v-else-if="condition === 'g'"  transform=scale(0.85) >

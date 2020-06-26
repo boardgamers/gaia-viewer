@@ -4,7 +4,7 @@
     <g style="pointer-events: none">
       <Resource v-for="(resource,i) in resources" :key="'field-' + i" :transform="`translate(${2 + 56/2 + resourceX(i)}, ${height/3*2 + 3 + resourceOffset})`" :kind="resource.type" :count="resource.count" />
       <Token v-for="player in players" :faction="player.faction" :transform="`translate(${tokenX(player.player)}, ${tokenY(player.player)})`" :key="player.player" :scale="5.5" />
-      <FederationTile v-if="this.federation" :federation="this.federation" :numTiles="1" x="5" y="7" height="35" />
+      <FederationTile v-if="this.federation" :federation="this.federation" :numTiles="1" x="5" y="7.4" height="33" />
       <circle v-if="this.lostPlanet" :class='["planet-fill", this.lostPlanet ]' cx="30" cy="18" r="10" />
     </g>
     <text x="0" y="0" :transform="`translate(${2 + 56/2 }, ${height - 10})`" class="levDesc">{{label}}</text>
