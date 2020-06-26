@@ -12,6 +12,11 @@
       <VictoryPoint width="15" height="15" />
     </g>
     <Building v-else-if="kind=='gf'" building="gf" transform="translate(0.5, 0) scale(3)" />
+    <g v-else-if="kind=='down-lab'">
+      <Building faction="firaks" building="lab" transform="translate(-7.5, 0) scale(1.5)"/>
+      <Building faction="firaks" building="ts" transform="translate(7.5, 0) scale(1.5)"/>
+      <image xlink:href="../assets/resources/arrow-charge.svg" width=15 x=-7.5 y=-12.5 transform="scale(1,1)" />
+    </g>
     <Building v-else-if="kind=='space-station'" building="sp" transform="translate(0.5, 0) scale(2.5)" faction="ivits" />
     <template v-else-if="kind === 'step'">
       <image xlink:href='../assets/resources/dig-planet.svg' width=20 x=-10 y=-10 />
