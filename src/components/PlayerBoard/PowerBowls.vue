@@ -100,7 +100,6 @@ export default class BuildingGroup extends Vue {
   }
 
   get flat () {
-    return true;
     return this.$store.state.gaiaViewer.preferences.flatBuildings;
   }
 
