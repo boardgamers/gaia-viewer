@@ -104,9 +104,6 @@ export default class BuildingGroup extends Vue {
   }
 
   buildingFaction (i: number) {
-    if (this.gaia > i) {
-      return "gaia";
-    }
     return this.faction;
   }
 
