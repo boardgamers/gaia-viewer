@@ -100,7 +100,7 @@ export default class BuildingGroup extends Vue {
     if (this.ac1 || this.ac2) {
       return i === 0 ? !this.ac1 : !this.ac2;
     }
-    return i >= this.placed + this.gaia || this.gaia > i;
+    return i >= this.placed + this.gaia;
   }
 
   buildingFaction (i: number) {
