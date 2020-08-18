@@ -15,11 +15,6 @@ import { CubeCoordinates } from 'hexagrid';
 import FactionWheel from "./FactionWheel.vue";
 
 @Component<SpaceMap>({
-  computed: {
-    right () {
-      return (this.$store.state.gaiaViewer.data.players || []).length > 2 ? 33.5 : 26;
-    }
-  },
   components: {
     Sector,
     FactionWheel
@@ -40,6 +35,10 @@ export default class SpaceMap extends Vue {
 
   get map (this: SpaceMap): SpaceMapData {
     return this.$store.state.gaiaViewer.data.map;
+  }
+
+  get right () {
+    return (this.sectors || []).length > 7 ? 33.5 : 26;
   }
 }
 
