@@ -54,9 +54,10 @@ export default class FactionWheel extends Vue {
     const list = [Planet.Terra, Planet.Oxide, Planet.Volcanic, Planet.Desert, Planet.Swamp, Planet.Titanium, Planet.Ice, Planet.Gaia, Planet.Transdim];
     if (pos < 7) {
       const data = this.gameData;
-      const faction = data.player(data.currentPlayer).faction;
+      const player = this.$store.state.gaiaViewer.player ?? data.currentPlayer;
+      const faction = data.player(player).faction;
       if (faction != null) {
-        // player faction should be at the top
+        // own faction - or current players faction - should be at the top
         const planet = factions[faction].planet;
         const offset = list.indexOf(planet);
         return list[(pos + offset) % 7];
