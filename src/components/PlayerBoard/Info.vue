@@ -119,7 +119,7 @@ export default class BuildingGroup extends Vue {
   }
 
   research (index: number): number {
-    return this.data.research[ResearchField.values()[index]];
+    return this.data.research[this.researchType(index)];
   }
 
   get sectors (): number {
