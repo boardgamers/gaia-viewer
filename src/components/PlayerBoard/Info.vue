@@ -114,7 +114,7 @@ export default class BuildingGroup extends Vue {
     return parseInt(this.player.income.substr(index));
   }
 
-  researchType (index: number): string {
+  researchType (index: number): ResearchField {
     return ResearchField.values()[index];
   }
 
