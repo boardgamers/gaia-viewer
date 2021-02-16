@@ -7,7 +7,9 @@
     <!-- <rect v-if="kind=='q'" class="qic" width="14" height="14" x="-7" y="-7" /> -->
     <rect v-else-if="kind=='o'" class="ore" width="14" height="14" x="-7" y="-7" />
     <rect v-else-if="kind=='c'" class="credit" width="16" height="16" ry="8" rx="8" x="-8" y="-8" />
-    <rect v-else-if="['pw', 'pay-pw', 't', 'bowl-t', 'brainstone'].includes(kind)" class="power" width="15" height="15" ry="7.5" rx="7.5" x="-7.5" y="-7.5" />
+    <rect v-else-if="['pw', 'pay-pw', 't', 'bowl-t', 'tg', 'brainstone'].includes(kind)"
+          :class="kind === 'tg' ? 'gaia': 'power'"
+          width="15" height="15" ry="7.5" rx="7.5" x="-7.5" y="-7.5" />
     <polygon points="-7.5,3 -3,7.5 3,7.5 7.5,3 7.5,-3 3,-7.5 -3,-7.5 -7.5,-3"  v-else-if="kind=='k'" class="knowledge" />
     <g v-else-if="kind=='vp'" transform="translate(-7.5,-7.5)" class="vp">
       <VictoryPoint width="15" height="15" />
@@ -77,9 +79,7 @@
     </template>
     <image v-if="kind === 'pw'" xlink:href='../assets/resources/power-charge.svg' :height=133/346*20 width=20 transform="translate(-9.5, -13.5)" />
     <image v-if="kind === 'pay-pw'" xlink:href='../assets/resources/power-charge.svg' :height=133/346*20 width=20 transform="translate(9.5, -13.5) scale(-1,1) " />
-
-    <!-- <SpaceShip v-else-if="kind=='ship'" class="ship" :scale="14" /> -->
-    <text x="0" y="0" v-if="count >=0 && ['o','c','k','pw','pay-pw','t','bowl-t','vp','q','ship','gf'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{kind === 't' ? '+' : ''}}{{count}}</text>
+    <text x="0" y="0" v-if="count >=0 && ['o','c','k','pw','pay-pw','t','bowl-t','tg','vp','q','ship','gf'].includes(kind) || count === '+'" :class="{plus: count === '+'}">{{kind === 't' ? '+' : ''}}{{count}}</text>
     <text x="0" y="0" v-if="kind=='brainstone'">B</text>
    </g>
 </template>
@@ -150,6 +150,10 @@ g.resource {
 
   .power {
     fill: $res-power
+  }
+
+  .gaia {
+    fill: $gaia
   }
 
   .ore, .credit, .building.r, .ship {
