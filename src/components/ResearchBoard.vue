@@ -60,13 +60,13 @@ import BoardAction from "./BoardAction.vue";
 
 @Component({
   computed: {
-    fields(): ResearchField[] {
+    fields (): ResearchField[] {
       return ResearchField.values(this.expansions);
     },
-    expansions() {
+    expansions () {
       return this.$store.state.gaiaViewer.data.expansions;
     },
-    viewWidth() {
+    viewWidth () {
       return this.fields.length * 60;
     }
   },

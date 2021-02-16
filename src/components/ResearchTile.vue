@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import {
   Condition,
   Event,
@@ -63,7 +63,7 @@ import {
   Resource as ResourceEnum,
   Reward
 } from "@gaia-project/engine";
-import {descriptions} from "../data/research";
+import { descriptions } from "../data/research";
 import Token from "./Token.vue";
 import FederationTile from "./FederationTile.vue";
 import Planet from "./Planet.vue";
@@ -71,18 +71,18 @@ import Resource from "./Resource.vue";
 
 @Component<ResearchTile>({
   computed: {
-    players(): Player[] {
+    players (): Player[] {
       return this.$store.state.gaiaViewer.data.players.filter(
         player => player.faction && player.data.research[this.field] === this.level
       );
     },
-    tooltip() {
+    tooltip () {
       return `<b>Level ${this.level}:</b> ${descriptions[this.field][this.level]}`;
     },
-    height() {
+    height () {
       return this.level === 5 ? 46 : 36;
     },
-    federation(): Federation {
+    federation (): Federation {
       if (this.level === 5) {
         if (this.field === ResearchField.Terraforming) {
           return this.$store.state.gaiaViewer.data.terraformingFederation;
@@ -91,7 +91,7 @@ import Resource from "./Resource.vue";
         }
       }
     },
-    lostPlanet(): PlanetEnum {
+    lostPlanet (): PlanetEnum {
       if (this.level === 5 && this.field === ResearchField.Navigation) {
         for (const pl of this.players) {
           if (pl.data.lostPlanet) {
@@ -119,7 +119,7 @@ export default class ResearchTile extends Vue {
   @Prop({ type: Number })
   level: number;
 
-  resourceX(index: number) {
+  resourceX (index: number) {
     const res = this.resources;
     const l = res.length;
     const sep = l <= 2 ? 7 : 6;
@@ -127,25 +127,25 @@ export default class ResearchTile extends Vue {
     return -6 * (l - 1) + index * 2 * sep - ((res[0].count as any) === "+" ? 2 : 0);
   }
 
-  tokenX(index: number) {
+  tokenX (index: number) {
     return 10 + 13 * (index % 4) + 22 * (index > 3 ? 1 : 0);
   }
 
-  tokenY(index: number) {
+  tokenY (index: number) {
     return 10 + 13 * (index > 3 ? 1 : 0);
   }
 
-  onClick() {
+  onClick () {
     if (this.highlighted) {
       this.$store.dispatch("gaiaViewer/researchClick", this.field);
     }
   }
 
-  get resourceOffset() {
+  get resourceOffset () {
     return this.techContent.length > 0 ? -15 : 0;
   }
 
-  get resources() {
+  get resources () {
     const rewards = Reward.merge(...this.events.slice(0, 1).map(ev => ev.rewards));
 
     if (this.events[0] && this.events[0].operator === Operator.Income) {
@@ -157,36 +157,36 @@ export default class ResearchTile extends Vue {
       return this.level === 0
         ? Reward.parse("1r")
         : this.level === 2
-        ? Reward.parse("2r")
-        : this.level === 4
-        ? Reward.parse("3r")
-        : this.level === 5
-        ? Reward.parse("4r")
-        : rewards;
+          ? Reward.parse("2r")
+          : this.level === 4
+            ? Reward.parse("3r")
+            : this.level === 5
+              ? Reward.parse("4r")
+              : rewards;
     }
 
     if (this.field === ResearchField.Terraforming) {
       return this.level === 0
         ? Reward.parse("d")
         : this.level === 2
-        ? Reward.parse("2d")
-        : this.level === 3
-        ? Reward.parse("3d")
-        : rewards;
+          ? Reward.parse("2d")
+          : this.level === 3
+            ? Reward.parse("3d")
+            : rewards;
     }
 
     return rewards;
   }
 
-  get events() {
+  get events () {
     return researchTracks[this.field][this.level].map(s => new Event(s));
   }
 
-  get techContent() {
+  get techContent () {
     return this.events.filter(event => event.condition !== Condition.None);
   }
 
-  get highlighted(): boolean {
+  get highlighted (): boolean {
     return this.$store.state.gaiaViewer.context.highlighted.researchTiles.has(this.field + "-" + this.level);
   }
 }

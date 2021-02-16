@@ -77,16 +77,15 @@ export default class BuildingGroup extends Vue {
   }
 
   yPos (area: string) {
-    return this.data.gaiaformersInGaia>0 ? -0.5 : 0;
+    return this.data.gaiaformersInGaia > 0 ? -0.5 : 0;
   }
-
 
   power (area: string) {
     return this.data.power[area];
   }
 
-  brainstone (area: string){
-    return this.data.brainstone === area ;
+  brainstone (area: string) {
+    return this.data.brainstone === area;
   }
 
   income (resource: ResourceEnum) {
@@ -102,13 +101,11 @@ export default class BuildingGroup extends Vue {
   get flat () {
     return this.$store.state.gaiaViewer.preferences.flatBuildings;
   }
-
 }
 
 </script>
 <style lang="scss">
 @import '../../stylesheets/planets.scss';
-
 
 .power-bowls {
   circle {

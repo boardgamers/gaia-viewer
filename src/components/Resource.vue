@@ -87,7 +87,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { Resource as ResourceEnum , Faction} from '@gaia-project/engine';
+import { Resource as ResourceEnum, Faction } from '@gaia-project/engine';
 import Building from './Building.vue';
 import SpaceShip from './SpaceShip.vue';
 import Qic from './Resources/Qic.vue';
