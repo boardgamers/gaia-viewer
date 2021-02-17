@@ -125,7 +125,7 @@ export default class Commands extends Vue {
   }
 
   get commandName () {
-    return this.command ? this.command.name : null;
+    return this.command?.name;
   }
 
   get chooseFaction () {

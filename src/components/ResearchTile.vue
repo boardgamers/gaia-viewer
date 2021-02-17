@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import {Component, Prop} from "vue-property-decorator";
 import {
   Condition,
   Event,
@@ -63,7 +63,7 @@ import {
   Resource as ResourceEnum,
   Reward
 } from "@gaia-project/engine";
-import { descriptions } from "../data/research";
+import {descriptions} from "../data/research";
 import Token from "./Token.vue";
 import FederationTile from "./FederationTile.vue";
 import Planet from "./Planet.vue";
@@ -172,8 +172,7 @@ export default class ResearchTile extends Vue {
       ])]
     ]);
 
-    const track = extraRewards.get(this.field);
-    const extra = track ? track.get(this.level) : null;
+    const extra = extraRewards.get(this.field)?.get(this.level);
     if (extra) {
       const r = Reward.parse(extra);
       if (this.field === ResearchField.GaiaProject) {
