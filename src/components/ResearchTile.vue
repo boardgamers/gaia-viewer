@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import {
   Condition,
   Event,
@@ -63,7 +63,7 @@ import {
   Resource as ResourceEnum,
   Reward
 } from "@gaia-project/engine";
-import {descriptions} from "../data/research";
+import { descriptions } from "../data/research";
 import Token from "./Token.vue";
 import FederationTile from "./FederationTile.vue";
 import Planet from "./Planet.vue";
@@ -86,8 +86,6 @@ import Resource from "./Resource.vue";
       if (this.level === 5) {
         if (this.field === ResearchField.Terraforming) {
           return this.$store.state.gaiaViewer.data.terraformingFederation;
-        } else if (this.field === ResearchField.TradingVolume && this.players.length === 0) {
-          return Federation.Ship;
         }
       }
     },
