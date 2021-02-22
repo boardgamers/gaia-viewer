@@ -24,7 +24,7 @@ import { eventDesc } from '../data/event';
     },
 
     faded () {
-      return !this.$store.state.gaiaViewer.data.boardActions[this.action];
+      return this.$store.state.gaiaViewer.data.boardActions[this.action] !== null;
     },
 
     kind () {

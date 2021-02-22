@@ -43,14 +43,14 @@
   dependencies:
     utilise "^2.3.5"
 
-"@gaia-project/engine@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@gaia-project/engine/-/engine-4.4.0.tgz#d398295ea1d615e0176e587689667fd8dba880c6"
-  integrity sha512-ctayPjoVrd61H5djVoX/6UZBoIWbjKv1Yak35ZPGQPyqjZW0Lje20gwC2EV2GqfPEI3FwUFK5mpboEjrl0x7Jg==
+"@gaia-project/engine@^4.6.5":
+  version "4.6.5"
+  resolved "https://registry.yarnpkg.com/@gaia-project/engine/-/engine-4.6.5.tgz#351c822745dbd44c6e6016f67e0ff6a5e952f9c6"
+  integrity sha512-Xv1Ph0Q6TzSknE0pV3kaaKOaWT3w/HQXUrtk6M3Gff3lfDQhkdBEo27n0DsZd+3Vtk+7vH5NY4GqksyqQb6RuA==
   dependencies:
-    axios "^0.19.2"
+    axios "^0.21.1"
     eventemitter3 "^3.1.0"
-    hexagrid "^2.1.0"
+    hexagrid "^2.1.1"
     lodash "^4.17.15"
     seedrandom "2.4.3"
     shuffle-seed "1.1.6"
@@ -1070,12 +1070,12 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
 
-axios@^0.19.2:
-  version "0.19.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
-  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
-    follow-redirects "1.5.10"
+    follow-redirects "^1.10.0"
 
 babel-code-frame@^6.22.0:
   version "6.26.0"
@@ -2639,13 +2639,6 @@ debug@3.2.6, debug@^3.0.0, debug@^3.1.1, debug@^3.2.5:
   dependencies:
     ms "^2.1.1"
 
-debug@=3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
-  dependencies:
-    ms "2.0.0"
-
 debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
@@ -3843,19 +3836,17 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@1.5.10:
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
-  integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
-  dependencies:
-    debug "=3.1.0"
-
 follow-redirects@^1.0.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.10.0.tgz#01f5263aee921c6a54fb91667f08f4155ce169eb"
   integrity sha512-4eyLK6s6lH32nOvLLwlIOnr9zrL8Sm+OvW4pVTJNoXeGzYIkHVf+pADQi+OJ0E67hiuSLezPVPyBcIZO50TmmQ==
   dependencies:
     debug "^3.0.0"
+
+follow-redirects@^1.10.0:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
+  integrity sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA==
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4342,10 +4333,10 @@ hexagrid@^2.0.1:
   resolved "https://registry.yarnpkg.com/hexagrid/-/hexagrid-2.0.1.tgz#87920c341df19c20bb8dd95707f4691ad27882cc"
   integrity sha512-zSsMdZSEZ3oAb8yee4cUenB5kuVckpy14lJ9D5MtTYEoFqwTnZLu81Vv+kfA8vlLXCW+84TuMtda5CQomBCAeg==
 
-hexagrid@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/hexagrid/-/hexagrid-2.1.0.tgz#3b7ea6f713ddfd434e737531087f161a1bacffc9"
-  integrity sha512-ybB21HKP8POrXyGJGuFP2gckDNynATfC0IqSQy7NVyUIs6mXbuSdfrSXfGNDSdilRCjTKG0QP3cQZSTlyZAUvA==
+hexagrid@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/hexagrid/-/hexagrid-2.1.1.tgz#e83076bde4217618bdbd9b642643aa61542c4fb9"
+  integrity sha512-Hzbz3A3kLGXSXoCPhseIpXIRv/Fw0o70gyCNjr4KVrUDbcYnoUjUdttf+1jz6YnddOu6+tGpEuJgJV3RUr5cdw==
 
 highlight.js@^9.6.0:
   version "9.18.1"
