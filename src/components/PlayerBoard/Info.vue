@@ -57,8 +57,6 @@
           <tspan>{{data.buildings.gf}}/{{data.gaiaformers}}</tspan>
         </text>
         <text class="board-text" x=6>Sat: {{data.satellites}}</text>
-        <text class="board-text" x=10.3 v-if="spaceShips">Ship: {{data.ships}}/{{3+data.advancedShips}}</text>
-        <text class="board-text" x=16 v-if="spaceShips">TM: {{data.tradeTokens + data.wildTradeTokens}}</text>
       </g>
     </g>
   </g>
@@ -87,10 +85,6 @@ export default class BuildingGroup extends Vue {
 
   get factionName (): string {
     return factions[this.faction].name;
-  }
-
-  get spaceShips (): boolean {
-    return (this.$store.state.gaiaViewer.data.expansions % 2) === 1;
   }
 
   income (resource: ResourceEnum) {

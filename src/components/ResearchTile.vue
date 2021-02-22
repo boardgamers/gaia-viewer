@@ -34,8 +34,6 @@ import Resource from './Resource.vue';
       if (this.level === 5) {
         if (this.field === ResearchField.Terraforming) {
           return this.$store.state.gaiaViewer.data.terraformingFederation;
-        } else if (this.field === ResearchField.TradingVolume && this.players.length === 0) {
-          return Federation.Ship;
         }
       }
     },

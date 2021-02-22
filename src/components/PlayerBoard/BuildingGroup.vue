@@ -37,7 +37,7 @@ export default class BuildingGroup extends Vue {
   building: BuildingEnum;
 
   @Prop()
-  faction: Faction;
+  faction!: Faction;
 
   @Prop()
   placed: number;

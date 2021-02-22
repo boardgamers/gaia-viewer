@@ -33,7 +33,7 @@ export default class SpaceMap extends Vue {
     return this.$store.state.gaiaViewer.context.rotation.get(`${center.q}x${center.r}`) || 0;
   }
 
-  get map (this: SpaceMap): SpaceMapData {
+  get map (): SpaceMapData {
     return this.$store.state.gaiaViewer.data.map;
   }
 
