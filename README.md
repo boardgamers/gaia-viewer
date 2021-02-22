@@ -3,6 +3,8 @@
 # gaia-viewer
 A Vue.js / SVG UI for Gaia Project
 
+**Used to maintain the old UI. The new repo is [HERE](https://github.com/boardgamers/gaia-project)**
+
 ## Demo
 
 Check out [boardgamers.space](https://www.boardgamers.space)!
